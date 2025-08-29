@@ -3,35 +3,20 @@ import PokemonArray from "./PokemonArray";
 import PokemonCard from "./PokemonCard";
 import Nav from "./Nav";
 import LinkToResourcePage from "../LinkToResourcePage";
+import { like_pokemon } from "../scripts/REST_api_calls";
 
-function getToken(){
-  try {return JSON.parse(sessionStorage.token).token;}
-  catch {return null};
-}
 
 function PokemonPage({ pokedex, id }) {
-  console.log(id);
-  const token = getToken();
 
-  React.useEffect(() => {
-    async function likePokemon(){
-      if(!isNaN(id) && token){
-        const response = await fetch(`http://localhost:3000/api/pokemon/${id}`, {method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": token
-          }
-        });
-        if(response.status == 401){
-          sessionStorage.clear();
-          window.location.replace("/login");
-        }
-      }
-    }; likePokemon();
-  });
+
+
+  //React.useEffect(() => {
+  //  like_pokemon(id);
+  //});
 
   const [pokemonData, setPokemonData] = React.useState(null);
   const [pokemonSpecies, setPokemonSpecies] = React.useState(null);
+
   React.useEffect(() => {
     async function getPokemonData() {
       if(id == null) return;

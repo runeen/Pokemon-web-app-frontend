@@ -7,7 +7,7 @@ function delay(ms) {
   });
 }
 
-function PokemonArray({ pokedex, idArray, pokemonPerPage }) {
+function PokemonArray({ pokedex, idArray, setPokemonLikedByUser, pokemonPerPage }) {
   const [page, setPage] = React.useState(0);
 
   const maxPage = Math.ceil(idArray.length / pokemonPerPage) - 1;
@@ -44,7 +44,7 @@ function PokemonArray({ pokedex, idArray, pokemonPerPage }) {
 
   const visiblePokemonCards = visiblePokemon.map((pokemonId) => (
     <li key = {pokemonId}>
-      <PokemonCard key={pokemonId} id={pokemonId} pokedex={pokedex} />
+      <PokemonCard key={pokemonId} id={pokemonId} pokedex={pokedex} setPokemonLikedByUser={setPokemonLikedByUser}/>
     </li>
   ));
 

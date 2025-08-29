@@ -1,9 +1,10 @@
 import React from 'react';
 import AbilityInCard from '../Ability/AbilityInCard.jsx';
 import LinkToResourcePage from '../LinkToResourcePage.jsx';
+import LikePokemonButton from './LikePokemonButton.jsx';
 
 
-function PokemonCard({ id, pokedex }) {
+function PokemonCard({ id, pokedex, setPokemonLikedByUser }) {
     const [pokemonData, setPokemonData] = React.useState(null);
 
     React.useEffect(() => {
@@ -37,6 +38,7 @@ function PokemonCard({ id, pokedex }) {
             </a>
             <h2 className="sub-title">Abilities:</h2>
                 {pokemonData.abilities.length > 0 ? pokemonData.abilities.map(ability => <LinkToResourcePage resource = {"ability"} id = {ability.ability.name} name = {ability.ability.name} className="ability-item"/>) : <></>}
+            <LikePokemonButton pokemon_id={pokemonData.id} setPokemonLikedByUser={setPokemonLikedByUser} />
         </div>
     );
 }

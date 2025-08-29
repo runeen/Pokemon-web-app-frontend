@@ -1,6 +1,14 @@
 import React from 'react';
+import { get_token_from_api } from '../scripts/REST_api_calls';
 
-function Login( {setToken} ){
+async function login(url, username, password) {
+    get_token_from_api(url, username, password); //TODO: ia si likes de la request :3
+    console.log('got token');
+    console.log('got likes');
+}
+
+
+function Login(){
 
     if(sessionStorage.token != null) {
         window.location.replace('/');
@@ -12,22 +20,7 @@ function Login( {setToken} ){
 
     const handleSubmit = async e => {
         e.preventDefault();
-        try {
-            const response = await fetch(`http://localhost:3000/api/auth/login`, {method: `POST`, headers: {'Content-type': 'application/json'}, body: JSON.stringify({username, password})});
-            console.log(response);
-            if(response.status == 200){
-                const body = await response.json();
-                console.log(body);
-                setToken(body, username);
-                window.location.replace('/');
-            }
-            else {
-                alert(`${response.status}, ${await response.text()}`)
-            }
-        } catch (error){
-            console.log(error);
-            alert(error);
-        }
+        login(`http://localhost:3000/api/auth/login`, username, password);
     }
 
 

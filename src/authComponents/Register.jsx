@@ -1,6 +1,13 @@
 import React from 'react';
+import { get_token_from_api, set_liked_pokemon } from '../scripts/REST_api_calls';
 
-function Register( {setToken} ) {
+async function register(url, username, password) {
+    get_token_from_api(url, username, password);
+    set_liked_pokemon([]);
+}
+
+
+function Register() {
     if(sessionStorage.token != null) {
         window.location.replace('/');
     }
@@ -10,21 +17,7 @@ function Register( {setToken} ) {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        try {
-            const response = await fetch(`http://localhost:3000/api/auth/register`, {method: `POST`, headers: {'Content-type': 'application/json'}, body: JSON.stringify({username, password})});
-            console.log(response);
-            if(response.status == 201){
-                const body = await response.json();
-                console.log(body);
-                setToken(body, username);
-                window.location.replace('/');
-            }
-            else {
-                alert(`${response.status}, ${await response.text()}`)
-            }
-        } catch (error){
-            console.log(error);
-        }
+        register(`http://localhost:3000/api/auth/register`, username, password);
     }
 
 
