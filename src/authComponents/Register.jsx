@@ -2,7 +2,7 @@ import React from 'react';
 import { get_token_from_api, set_liked_pokemon } from '../scripts/REST_api_calls';
 
 async function register(url, username, password) {
-    get_token_from_api(url, username, password);
+    await get_token_from_api(url, username, password);
     set_liked_pokemon([]);
 }
 
@@ -17,7 +17,8 @@ function Register() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        register(`http://localhost:3000/api/auth/register`, username, password);
+        await register(`http://localhost:3000/api/auth/register`, username, password);
+        window.location.replace('/');
     }
 
 

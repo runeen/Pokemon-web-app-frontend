@@ -64,7 +64,7 @@ p {
 
 .pokemon-card {
   width: 250px;
-  height: auto;
+  height: 500px;
   text-align: center;
   background-color: hsl(180, 70%, 50%);
   margin: 20px;
@@ -77,9 +77,6 @@ p {
   font-size: 25px;
 }
 
-.pokemon-card {
-  height: 430px;
-}
 
 .pokemon-card .pokemon-name:hover {
   color: hsl(0, 0%, 30%);

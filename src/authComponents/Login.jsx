@@ -2,9 +2,7 @@ import React from 'react';
 import { get_token_from_api } from '../scripts/REST_api_calls';
 
 async function login(url, username, password) {
-    get_token_from_api(url, username, password); //TODO: ia si likes de la request :3
-    console.log('got token');
-    console.log('got likes');
+    await get_token_from_api(url, username, password);
 }
 
 
@@ -20,7 +18,8 @@ function Login(){
 
     const handleSubmit = async e => {
         e.preventDefault();
-        login(`http://localhost:3000/api/auth/login`, username, password);
+        await login(`http://localhost:3000/api/auth/login`, username, password);
+        window.location.replace('/');
     }
 
 
