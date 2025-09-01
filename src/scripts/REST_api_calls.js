@@ -20,7 +20,7 @@ export function get_token_from_session_storage() {
 
 export function get_liked_pokemon_from_session_storage() {
     try { return JSON.parse(sessionStorage.liked_pokemon); }
-    catch (error) { console.log(error); return null}
+    catch (error) { return null}
 }
 
 

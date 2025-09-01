@@ -8,28 +8,27 @@ import { like_pokemon } from "../scripts/REST_api_calls";
 
 function PokemonPage({ pokedex, id }) {
 
-
-
-  //React.useEffect(() => {
-  //  like_pokemon(id);
-  //});
-
   const [pokemonData, setPokemonData] = React.useState(null);
   const [pokemonSpecies, setPokemonSpecies] = React.useState(null);
 
   React.useEffect(() => {
     async function getPokemonData() {
       if(id == null) return;
-      if (pokemonData == null) {
-        const response = await pokedex.getPokemonByName(id);
-        console.log("fetched data");
-        setPokemonData(response);
-      }
+      try{
+        if (pokemonData == null) {
+          const response = await pokedex.getPokemonByName(id);
+          console.log("fetched data");
+          setPokemonData(response);
+        }
 
-      if (pokemonData != null && pokemonSpecies == null) {
-        const response = await pokedex.resource(pokemonData.species.url);
-        console.log("fetched data");
-        setPokemonSpecies(response);
+        if (pokemonData != null && pokemonSpecies == null) {
+          const response = await pokedex.resource(pokemonData.species.url);
+          console.log("fetched data");
+          setPokemonSpecies(response);
+        }
+      }
+      catch {
+        console.log("error fetching data from pokeapi");
       }
     }
     getPokemonData();
@@ -38,7 +37,7 @@ function PokemonPage({ pokedex, id }) {
   if(!id) return (<PokemonArray pokedex={pokedex} idArray={[1]} pokemonPerPage={10}/>);
 
   if (!pokemonData || !pokemonSpecies) {
-    return <div>Loading Pokémon data.</div>;
+    return <div className={"on-black"}>Loading Pokémon data, ID= {id}</div>;
   }
 
   const speciesFlavorText = pokemonSpecies.flavor_text_entries.find(

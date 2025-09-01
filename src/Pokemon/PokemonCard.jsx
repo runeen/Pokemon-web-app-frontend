@@ -22,7 +22,7 @@ function PokemonCard({ id, pokedex, setPokemonLikedByUser }) {
     }, [id, pokedex]);
 
     if (!pokemonData) {
-        return (<div className="pokemon-card"/>);
+        return (<div className="pokemon-card"><p>loading pokemon ID: {id}</p></div>);
     }
 
     /*

@@ -2,11 +2,11 @@ import React from 'react';
 import PokemonArray from '../Pokemon/PokemonArray';
 import Nav from '../Pokemon/Nav';
 import { get_liked_pokemon_from_session_storage } from '../scripts/REST_api_calls';
-
+import TeamCard from '../Teams/TeamCard';
 function Test( { pokedex } ) {
 
     const [apiResponse, setApiResponse] = React.useState(null);
-    const [serverUrl, _] = React.useState("http://localhost:3000/api/profile/liked_pokemon");
+    const [serverUrl, _] = React.useState("http://localhost:3000/api/profile/users/liked_pokemon");
 
     const [pokemonLikedByUser, setPokemonLikedByUser] = React.useState(null);
 
@@ -53,6 +53,8 @@ function Test( { pokedex } ) {
         <Nav resource={"pokemon"} defaultValue={1} />
         {userPokemonArray}
         {userDetailsArea}
+
+        <TeamCard team_id={7} pokedex={pokedex} setPokemonLikedByUser={setPokemonLikedByUser}/>
         </div>
     );
 
