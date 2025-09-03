@@ -20,18 +20,51 @@ export function get_token_from_session_storage() {
 
 export function get_liked_pokemon_from_session_storage() {
     try { return JSON.parse(sessionStorage.liked_pokemon); }
-    catch (error) { return null}
+    catch (error) { return [];}
 }
 
 
 export function check_pokemon_liked(pokemon_id) {
     const likes_session = get_liked_pokemon_from_session_storage();
     if (!likes_session) return;
-    console.log(likes_session);
     return likes_session.includes(pokemon_id);
 }
 
+export async function add_team(name, description){
+    const authToken = get_token_from_session_storage();
+    if (!authToken) {
+        window.location.replace('./login');
+        return null;
+    }
+    try {// CORS OPRESTE ACEST REQUEST, DAR PE ALTELE NU... ?
+        const response = await fetch(
+            "http://localhost:3000/api/team",
+            {
+                method: `POST`,
+                headers: {'Content-type': 'application/json',
+                          'Authorization': get_token_from_session_storage()
+                },
+                body:   `{ "name": "${name}", "description": "${description}" }`
+            }
+        );
+        if (response.status == 201) {
+            const body = await response.json();
+            window.location.reload();
+            return 0;
+        }
+        if (response.status == 401) {
+            console.log(`NOT AUTHORIZED ERROR!`);
+            window.location.replace("./login");
+            return -1;
+        }
 
+        console.log(`ERROR CREATING TEAM`);
+        return -1;
+    } catch (error){
+        console.log(error);
+        return -1;
+    }
+}
 
 export async function get_token_from_api(url, username, password) {
     try {
@@ -39,15 +72,12 @@ export async function get_token_from_api(url, username, password) {
         console.log(response);
         if (response.status == 200 || response.status == 201) {
             const body = await response.json();
-            console.log(body.token);
             set_token(body.token, username);
 
             if (response.status == 200) { // daca am primit confirmare pentru login
                 set_liked_pokemon(body.likes);
-                console.log(get_liked_pokemon_from_session_storage());
             } else if (response.status == 201) { // daca am primit confirmare pentru registrare noua
                 set_liked_pokemon([]);
-                console.log(get_liked_pokemon_from_session_storage());
             }
         }
         else {
@@ -79,7 +109,6 @@ export async function like_pokemon(pokemon_id) {
             const likes_array = get_liked_pokemon_from_session_storage();
             likes_array.push(pokemon_id);
             set_liked_pokemon(likes_array);
-            console.log(get_liked_pokemon_from_session_storage());
         }
 
     }
@@ -104,7 +133,6 @@ export async function remove_like_pokemon(pokemon_id) {
         if (response.status == 200) { // Daca am sters cu succes like-ul
             const likes_array = get_liked_pokemon_from_session_storage();
             const new_array = likes_array.filter((entry) => {return entry != pokemon_id});
-            console.log(new_array);
             set_liked_pokemon(new_array);
         }
     }

@@ -8,17 +8,16 @@ function LikePokemonButton( {pokemon_id, setPokemonLikedByUser} ){
     const [liked, setLiked] = React.useState();
     const [loggedIn, setLoggedIn] = React.useState(false);
 
-
-    React.useEffect(() => {
+    if(loggedIn == false){
         if(get_token_from_session_storage()) {
             setLoggedIn(true);
         }
-    }, []);
+    }
 
 
-    React.useEffect(() => {
+    if(liked == null) {
         setLiked(check_pokemon_liked(pokemon_id));
-    }, []);
+    }
 
 
     if(loggedIn == false) return <></>;

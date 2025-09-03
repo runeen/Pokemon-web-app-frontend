@@ -7,18 +7,20 @@ import CreateTeam from '../Teams/CreateTeam';
 function Test( { pokedex } ) {
 
     const [apiResponse, setApiResponse] = React.useState(null);
-    const [serverUrl, _] = React.useState("http://localhost:3000/api/profile/users/liked_pokemon");
 
     const [pokemonLikedByUser, setPokemonLikedByUser] = React.useState(null);
 
-    React.useEffect(() => {
+    console.log(pokemonLikedByUser);
+
+    if(pokemonLikedByUser == null){
         setPokemonLikedByUser(get_liked_pokemon_from_session_storage());
-    });
+    }
+
 
     React.useEffect(() => {
         async function getApiData(){
             try {
-                const result = await fetch(serverUrl);
+                const result = await fetch("http://localhost:3000/api/profile/users/liked_pokemon");
                 const response = await result.json();
                 console.log("fetched api data");
                 console.log(response);
@@ -28,8 +30,10 @@ function Test( { pokedex } ) {
                 console.log("ERROR: " ,error);
             }
         }
-        getApiData();
-    }, [serverUrl]);
+        if (apiResponse == null) getApiData();
+    }, []);
+
+
 
     let userDetailsArea;
     let userPokemonArray;

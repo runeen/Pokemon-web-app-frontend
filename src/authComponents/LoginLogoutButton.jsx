@@ -1,30 +1,53 @@
 import React from "react";
 
+function get_username() {
+    try {
+        const usernameStr = sessionStorage.getItem("username");
+        if(usernameStr) setUsername(usernameStr.replaceAll('"', ''));
+        console.log(usernameStr);
+    }
+    catch {
+        ;
+    }
+}
 
 function LoginLogoutButton() {
 
-    const [username, setUsername] = React.useState();
+    const [username, setUsername] = React.useState(null);
+    const [loggedIn, setLoggedIn] = React.useState(false);
 
-    React.useEffect(() => {
+    if (!loggedIn) {
         try {
+            if(sessionStorage.getItem("token"))  setLoggedIn(true);
+        }
+        catch (error){
+            setLoggedIn(false);
+            setUsername(null);
+            console.log(error);
+        }
+    }
+
+    if (loggedIn && !username) {
+        try{
             const usernameStr = sessionStorage.getItem("username");
             if(usernameStr) setUsername(usernameStr.replaceAll('"', ''));
+            console.log(usernameStr);
         }
-        catch {
-            ;
+        catch (error) {
+            console.log(error);
         }
-    }, []);
 
-    console.log(username);
+        return(<h1>GETTING USERNAME</h1>);
+    }
 
-
-    if(username) {
+    if(username && loggedIn) {
         return(
         <>
         <h2 className="on-black">You are logged in as {username}</h2> <button onClick={() => {sessionStorage.clear(); setUsername("");}}>Log out.</button>
         </>)
     }
-    else {
+
+    if (!loggedIn){
         return(
             <>
             <h2 className="on-black">You are not logged in.</h2> <button onClick={() => {window.location.replace("/login");}}>Log in.</button>

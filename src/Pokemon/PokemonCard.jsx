@@ -18,7 +18,7 @@ function PokemonCard({ id, pokedex, setPokemonLikedByUser }) {
                 console.log("ERROR: " ,error);
             }
         }
-        getPokemonData();
+        if(pokemonData == null) getPokemonData();
     }, [id, pokedex]);
 
     if (!pokemonData) {
