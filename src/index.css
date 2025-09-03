@@ -15,6 +15,19 @@ ul {
   align-items: center;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+
+  font-size: 25px;
+}
+
+input {
+  margin-bottom: 30px;
+}
+
 .pokemon-array {
   display: flex;
   flex-direction: row;

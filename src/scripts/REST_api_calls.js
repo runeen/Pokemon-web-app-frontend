@@ -34,7 +34,7 @@ export async function add_team(name, description){
     const authToken = get_token_from_session_storage();
     if (!authToken) {
         window.location.replace('./login');
-        return null;
+        return -1;
     }
     try {// CORS OPRESTE ACEST REQUEST, DAR PE ALTELE NU... ?
         const response = await fetch(
