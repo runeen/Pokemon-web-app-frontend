@@ -30,6 +30,51 @@ export function check_pokemon_liked(pokemon_id) {
     return likes_session.includes(pokemon_id);
 }
 
+export async function edit_team(name, description, team_id) {
+    const authToken = get_token_from_session_storage();
+    if (!authToken) {
+        window.location.replace('./login');
+        return -1;
+    }
+
+    let bodyStr = "{ ";
+    if (name) bodyStr = bodyStr + `"name": "${name}" `;
+    if (name && description) bodyStr = bodyStr + `, `;
+    if (description) bodyStr = bodyStr + `"description": "${description}" `;
+    bodyStr = bodyStr + `}`;
+    console.log(bodyStr)
+
+    try {// CORS OPRESTE ACEST REQUEST, DAR PE ALTELE NU... ?
+        const response = await fetch(
+            `http://localhost:3000/api/team/${team_id}`,
+            {
+                method: `PUT`,
+                headers: {'Content-type': 'application/json',
+                          'Authorization': get_token_from_session_storage()
+                },
+                body: bodyStr
+            }
+        );
+        if (response.status == 200) {
+            const body = await response.json();
+            window.location.reload();
+            return 0;
+        }
+        if (response.status == 401) {
+            console.log(`NOT AUTHORIZED ERROR!`);
+            window.location.replace("./login");
+            return -1;
+        }
+        //TODO: make sure all codes are handled properly
+
+        console.log(`ERROR CREATING TEAM`);
+        return -1;
+    } catch (error){
+        console.log(error);
+        return -1;
+    }
+}
+
 export async function add_team(name, description){
     const authToken = get_token_from_session_storage();
     if (!authToken) {

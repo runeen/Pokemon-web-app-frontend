@@ -1,16 +1,16 @@
 import React from 'react';
-import { add_team } from '../scripts/REST_api_calls.js';
+import { edit_team} from '../scripts/REST_api_calls.js';
 
-function tryAddingTeam(name, description) {
+function tryEditTeam(name, description, team_id) {
 
-  if (name == '' || description == '') return -1;
+  if (name == '' && description == '') return -1;
 
   try {
-    const result = add_team(name, description);
+    const result = edit_team(name, description, team_id);
     if (result == 1) {
-      console.log("ERROR ADDING TEAM.");
+      console.log("ERROR EDITING TEAM.");
     }
-    console.log("Added team.");
+    console.log("Edited team.");
   } catch (error) {
     console.log(error);
   }
@@ -18,21 +18,23 @@ function tryAddingTeam(name, description) {
 }
 
 
-function CreateTeam() {
+function EditTeam() {
 
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [teamId, setTeamId] = React.useState(0);
 
   return(
     <div>
-      <h1 className={"title on-black"}>CreateTeam </h1>
-      <form onSubmit={(e) => {e.preventDefault(); tryAddingTeam(name, description); }}>
+      <h1 className={"title on-black"}>Edit Team:</h1>
+      <form onSubmit={(e) => {e.preventDefault(); tryEditTeam(name, description, teamId); }}>
         <label className={"on-black"}>Name: </label>
         <input value={name} name="name" placeholder="Team" onChange={e => setName(e.target.value)} />
         <label className={"on-black"}>Description: </label>
         <textarea value={description} name="description" placeholder="Aspirations and long term goals"  onChange={e => setDescription(e.target.value)} rows={5} columns={200} wrap={"hard"}/>
+        <input type={"number"} name="team_id" onChange={e => setTeamId(e.target.value)}/>
         <button type="submit">
-          Ceate New Team
+          Edit New Team
         </button>
       </form>
     </div>
@@ -43,4 +45,4 @@ function CreateTeam() {
 
 
 
-export default CreateTeam;
+export default EditTeam;
