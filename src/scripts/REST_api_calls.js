@@ -30,6 +30,23 @@ export function check_pokemon_liked(pokemon_id) {
     return likes_session.includes(pokemon_id);
 }
 
+export async function get_user_teams() {
+  const authToken = get_token_from_session_storage();
+  const username = JSON.parse(sessionStorage.getItem("username"));
+  if(!authToken) {
+    window.location.replace('./login');
+    return -1;
+  }
+  console.log(username);
+  const response = await fetch(`http://localhost:3000/api/profile/users/${username}/teams`);
+
+  if (response.status == 200)   {
+    const body = await response.json();
+    console.log(body);
+    return body;
+  }
+  return -1;
+}
 export async function edit_team(name, description, team_id) {
     const authToken = get_token_from_session_storage();
     if (!authToken) {
@@ -50,7 +67,7 @@ export async function edit_team(name, description, team_id) {
             {
                 method: `PUT`,
                 headers: {'Content-type': 'application/json',
-                          'Authorization': get_token_from_session_storage()
+                          'Authorization': authToken
                 },
                 body: bodyStr
             }
