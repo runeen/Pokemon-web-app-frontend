@@ -1,47 +1,29 @@
 import React from 'react';
-import PokemonArray from '../Pokemon/PokemonArray.jsx';
-async function getTeamData(team_id, setApiResponse) {
-  const request = await fetch(`http://localhost:3000/api/team/${team_id}`);
-  const response = await request.json();
-  console.log("fetched user api data");
-  console.log("TEAM API: ", response);
-  setApiResponse(response);
-}
+import { get_team } from '../scripts/REST_api_calls.js';
+import EditTeam from './EditTeam.jsx';
+import ViewTeam from './ViewTeam.jsx';
 
 
+function TeamCard( { propsTeamID }) {
 
+    // currentVisibleComponent E {"ViewTeam", "EditTeam", "RemovedTeam"}
+    const [currentVisibleComponent, setCurrentVisibleComponent] = React.useState("ViewTeam");
+    const [teamID, setTeamID] = React.useState(null); 
+    
+    if(currentVisibleComponent == "RemovedTeam")    return(<></>);
 
-function TeamCard( {team_id, pokedex, setPokemonLikedByUser} ) {
-  const [teamData, setTeamData] = React.useState(null);
-
-  React.useEffect(() => {
-    try {
-      getTeamData(team_id, setTeamData);
-    } catch (error) {
-      console.log(error);
+    if(propsTeamID && !teamID) { 
+        setTeamID(propsTeamID);
     }
-  }, [team_id]);
 
-  if (!teamData) {
-    return (<h1 className={"on-black"}> Getting Team Data</h1>);
-  }
+    if(currentVisibleComponent == "EditTeam" && teamID) {
+        return (<EditTeam teamID={teamID} setCurrentVisibleComponent={setCurrentVisibleComponent} />);
+    }
+    
 
-
-  const echipaArray = <PokemonArray pokedex={pokedex} idArray={
-    teamData.pokemonReply.map(entry => entry.pokemon_id)
-  } pokemonPerPage={3} setLikes={setPokemonLikedByUser}
-   />
-
-  //TODO: FA CA TEAM REPLY SA NU TRIMITA UN ARR CU UN ELEMENT
-  return (
-      <div>
-        <h3 className={"on-black"}> UTILIZATOR: {teamData.teamReply[0].owner} </h3>
-        <h1 className={"on-black"}> ECHIPIA: {teamData.teamReply[0].team} </h1>
-        <p>  DESCRIERE: {teamData.teamReply[0].team_description}</p>
-        {echipaArray}
-      </div>
-  );
-
-};
+    return (
+        <ViewTeam teamID={teamID} setCurrentVisibleComponent={setCurrentVisibleComponent} />
+    );
+}
 
 export default TeamCard;

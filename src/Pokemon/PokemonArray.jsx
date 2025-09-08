@@ -47,15 +47,11 @@ function PokemonArray({ pokedex, idArray, setPokemonLikedByUser, pokemonPerPage 
       <PokemonCard key={pokemonId} id={pokemonId} pokedex={pokedex} setPokemonLikedByUser={setPokemonLikedByUser}/>
     </li>
   ));
-
-  return (
-    <div className="pokemon-array">
-      <div className="page">
-        <div>
-          <ul>{visiblePokemonCards}</ul>
-        </div>
-      </div>
-      {lastVisible && (
+  
+  let pageSelectElements = <></>;
+  if (maxPage > 0) {
+      pageSelectElements = (<>
+        {lastVisible && (
         <button className={"scroll-button"} onClick={handleLastButton}>
           Last Page
         </button>
@@ -70,6 +66,19 @@ function PokemonArray({ pokedex, idArray, setPokemonLikedByUser, pokemonPerPage 
           Next Page
         </button>
       )}
+    </>);
+  }
+
+  return (
+    <div className="pokemon-array">
+      <div className="page">
+        <div>
+          <ul>{visiblePokemonCards}</ul>
+        </div>
+      </div>
+
+      {pageSelectElements}
+            
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { get_liked_pokemon_from_session_storage } from '../scripts/REST_api_call
 import TeamCard from '../Teams/TeamCard';
 import CreateTeam from '../Teams/CreateTeam';
 import EditTeam from '../Teams/EditTeam';
+import TeamCardArray from '../Teams/TeamCardArray';
 function Test( { pokedex } ) {
 
     const [apiResponse, setApiResponse] = React.useState(null);
@@ -57,8 +58,7 @@ function Test( { pokedex } ) {
     return (
         <div>
         <Nav resource={"pokemon"} defaultValue={1} />
-        <CreateTeam />
-        <EditTeam />
+        <TeamCardArray username={"uhm_mhm"} />
         {userPokemonArray}
         {userDetailsArea}
         <TeamCard team_id={30} pokedex={pokedex} setPokemonLikedByUser={setPokemonLikedByUser}/>

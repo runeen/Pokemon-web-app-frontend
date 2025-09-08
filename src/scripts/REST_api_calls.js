@@ -1,5 +1,3 @@
-
-
 export function set_token(token, username) {
     sessionStorage.setItem("token", token);
     sessionStorage.setItem("username", JSON.stringify(username));
@@ -8,7 +6,6 @@ export function set_token(token, username) {
 export function set_liked_pokemon(liked_pokemon) {
     sessionStorage.setItem("liked_pokemon", JSON.stringify(liked_pokemon));
 }
-
 
 export function get_token_from_session_storage() {
     try { return sessionStorage.token; }
@@ -23,7 +20,6 @@ export function get_liked_pokemon_from_session_storage() {
     catch (error) { return [];}
 }
 
-
 export function check_pokemon_liked(pokemon_id) {
     const likes_session = get_liked_pokemon_from_session_storage();
     if (!likes_session) return;
@@ -31,22 +27,32 @@ export function check_pokemon_liked(pokemon_id) {
 }
 
 export async function get_user_teams() {
-  const authToken = get_token_from_session_storage();
-  const username = JSON.parse(sessionStorage.getItem("username"));
-  if(!authToken) {
-    window.location.replace('./login');
-    return -1;
-  }
-  console.log(username);
-  const response = await fetch(`http://localhost:3000/api/profile/users/${username}/teams`);
+    const authToken = get_token_from_session_storage();
+    const username = JSON.parse(sessionStorage.getItem("username"));
+    if(!authToken) {
+        window.location.replace('./login');
+        return -1;
+    }
+    const response = await fetch(`http://localhost:3000/api/profile/users/${username}/teams`);
 
-  if (response.status == 200)   {
-    const body = await response.json();
-    console.log(body);
-    return body;
-  }
-  return -1;
+    if (response.status == 200)   {
+        const body = await response.json();
+        return body;
+    }
+    return -1;
 }
+
+export async function get_username_teams(username) {
+    
+    const response = await fetch(`http://localhost:3000/api/profile/users/${username}/teams`);
+    if (response.status == 200){
+        const body = await response.json();
+        console.log(body);
+        return body;
+    }
+    return -1;
+}
+
 export async function edit_team(name, description, team_id) {
     const authToken = get_token_from_session_storage();
     if (!authToken) {
@@ -61,7 +67,7 @@ export async function edit_team(name, description, team_id) {
     bodyStr = bodyStr + `}`;
     console.log(bodyStr)
 
-    try {// CORS OPRESTE ACEST REQUEST, DAR PE ALTELE NU... ?
+    try {
         const response = await fetch(
             `http://localhost:3000/api/team/${team_id}`,
             {
@@ -73,8 +79,6 @@ export async function edit_team(name, description, team_id) {
             }
         );
         if (response.status == 200) {
-            const body = await response.json();
-            window.location.reload();
             return 0;
         }
         if (response.status == 401) {
@@ -91,14 +95,15 @@ export async function edit_team(name, description, team_id) {
         return -1;
     }
 }
-
+// functia asta returneaza desi altele nu, ar trebui sa returneze si celelalte?
 export async function add_team(name, description){
     const authToken = get_token_from_session_storage();
     if (!authToken) {
         window.location.replace('./login');
         return -1;
     }
-    try {// CORS OPRESTE ACEST REQUEST, DAR PE ALTELE NU... ?
+
+    try {
         const response = await fetch(
             "http://localhost:3000/api/team",
             {
@@ -111,8 +116,7 @@ export async function add_team(name, description){
         );
         if (response.status == 201) {
             const body = await response.json();
-            window.location.reload();
-            return 0;
+            return body;
         }
         if (response.status == 401) {
             console.log(`NOT AUTHORIZED ERROR!`);
@@ -128,22 +132,65 @@ export async function add_team(name, description){
     }
 }
 
+export async function remove_team(teamID) {
+    const authToken = get_token_from_session_storage();
+    if (!authToken) {
+        window.location.replace('./login');
+        return -1;
+    }
+
+    try {
+       const response = await fetch(
+            `http://localhost:3000/api/team/${teamID}`,
+           {
+                method: `DELETE`,
+                headers: {"Content-type": "application/json",
+                          "Authorization": authToken},
+           }
+       ); 
+       if (response.status == 200) {
+           return 0;
+       }
+       console.log(response);  
+       return -1;
+    }
+    catch (error){ 
+        console.log(error);
+        return -1;
+    }
+
+}
+
+export async function get_team(teamID) {
+    try {
+        const response = await fetch(
+            `http://localhost:3000/api/team/${teamID}`
+        );
+        if (response.status == 200) {
+            const body = await response.json();
+            return body;
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export async function get_token_from_api(url, username, password) {
     try {
-        const response = await fetch(url, { method: `POST`, headers: { 'Content-type': 'application/json' }, body: JSON.stringify({ username, password }) });
-        console.log(response);
+        const response = await fetch(url, { 
+            method: `POST`, 
+            headers: { 'Content-type': 'application/json' }, 
+            body: JSON.stringify({ username, password }) 
+        });
+
         if (response.status == 200 || response.status == 201) {
             const body = await response.json();
-            set_token(body.token, username);
 
-            if (response.status == 200) { // daca am primit confirmare pentru login
-                set_liked_pokemon(body.likes);
-            } else if (response.status == 201) { // daca am primit confirmare pentru registrare noua
-                set_liked_pokemon([]);
-            }
-        }
-        else {
-            alert(`${response.status}, ${await response.text()}`)
+            set_token(body.token, username);
+            
+            if (response.status == 200)    set_liked_pokemon(body.likes);  // daca am primit confirmare pentru login
+            else if (response.status == 201)   set_liked_pokemon([]);      // daca am primit confirmare pentru registrare noua
         }
     } catch (error) {
         console.log(error);
@@ -153,8 +200,13 @@ export async function get_token_from_api(url, username, password) {
 
 export async function like_pokemon(pokemon_id) {
     const token = get_token_from_session_storage();
+    
+    if (!token) {
+        window.location.replace("/login");
+        return;
+    }
 
-    if (!isNaN(pokemon_id) && token) {
+    if (!isNaN(pokemon_id)) {
         const response = await fetch(`http://localhost:3000/api/pokemon/${pokemon_id}`, {
             method: "POST",
             headers: {
@@ -178,8 +230,13 @@ export async function like_pokemon(pokemon_id) {
 
 export async function remove_like_pokemon(pokemon_id) {
     const token = get_token_from_session_storage();
+    
+    if (!token) {
+        window.location.replace("/login");
+        return;
+    }
 
-    if (!isNaN(pokemon_id) && token) {
+    if (!isNaN(pokemon_id)) {
         const response = await fetch(`http://localhost:3000/api/pokemon/${pokemon_id}`, {
             method: "DELETE",
             headers: {
