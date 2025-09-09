@@ -4,7 +4,7 @@ import LinkToResourcePage from '../LinkToResourcePage.jsx';
 import LikePokemonButton from './LikePokemonButton.jsx';
 
 
-function PokemonCard({ id, pokedex, setPokemonLikedByUser }) {
+function PokemonCard({ id, pokedex, pokemonLikedByUser, setPokemonLikedByUser }) {
     const [pokemonData, setPokemonData] = React.useState(null);
 
     React.useEffect(() => {
@@ -29,7 +29,7 @@ function PokemonCard({ id, pokedex, setPokemonLikedByUser }) {
     <h2 className="sub-title">Moves:</h2>
     {pokemonData.moves.length > 0 ? pokemonData.moves.map(move => <MoveInCard moveName={move.move.name} pokedex={pokedex} />): <></>}
     */
-
+    console.log("pokemon liked in pokemon card component: ", pokemonLikedByUser)
     return (
         <div className="pokemon-card">
             <a href={`/pokemon/${pokemonData.name}`}>
@@ -38,7 +38,7 @@ function PokemonCard({ id, pokedex, setPokemonLikedByUser }) {
             </a>
             <h2 className="sub-title">Abilities:</h2>
                 {pokemonData.abilities.length > 0 ? pokemonData.abilities.map(ability => <LinkToResourcePage resource = {"ability"} id = {ability.ability.name} name = {ability.ability.name} className="ability-item"/>) : <></>}
-            <LikePokemonButton pokemon_id={pokemonData.id} setPokemonLikedByUser={setPokemonLikedByUser} />
+            <LikePokemonButton pokemon_id={pokemonData.id} pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser={setPokemonLikedByUser} />
         </div>
     );
 }

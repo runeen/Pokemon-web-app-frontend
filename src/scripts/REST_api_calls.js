@@ -15,6 +15,8 @@ export function get_token_from_session_storage() {
     };
 }
 
+
+
 export function get_liked_pokemon_from_session_storage() {
     try { return JSON.parse(sessionStorage.liked_pokemon); }
     catch (error) { return [];}
@@ -203,7 +205,8 @@ export async function like_pokemon(pokemon_id) {
     
     if (!token) {
         window.location.replace("/login");
-        return;
+        return [];
+
     }
 
     if (!isNaN(pokemon_id)) {
@@ -217,23 +220,27 @@ export async function like_pokemon(pokemon_id) {
         if (response.status == 401) {
             sessionStorage.clear();
             window.location.replace("/login");
+            return [];
         }
 
         if (response.status == 200) { // Am adaugat like cu success
             const likes_array = get_liked_pokemon_from_session_storage();
             likes_array.push(pokemon_id);
             set_liked_pokemon(likes_array);
+            return likes_array;
         }
 
     }
+    return get_liked_pokemon_from_session_storage();
 };
 
 export async function remove_like_pokemon(pokemon_id) {
+
     const token = get_token_from_session_storage();
     
     if (!token) {
         window.location.replace("/login");
-        return;
+        return [];
     }
 
     if (!isNaN(pokemon_id)) {
@@ -247,12 +254,16 @@ export async function remove_like_pokemon(pokemon_id) {
         if (response.status == 401) {
             sessionStorage.clear();
             window.location.replace("/login");
+            return [];
         }
 
         if (response.status == 200) { // Daca am sters cu succes like-ul
             const likes_array = get_liked_pokemon_from_session_storage();
             const new_array = likes_array.filter((entry) => {return entry != pokemon_id});
             set_liked_pokemon(new_array);
-        }
+            return(new_array); 
+       }
     }
+
+    return get_liked_pokemon_from_session_storage(); 
 }

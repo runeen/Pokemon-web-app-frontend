@@ -18,7 +18,7 @@ function Test( { pokedex } ) {
         setPokemonLikedByUser(get_liked_pokemon_from_session_storage());
     }
 
-
+    //TODO: YOOO avem REST api calls pt asta damn
     React.useEffect(() => {
         async function getApiData(){
             try {
@@ -39,7 +39,7 @@ function Test( { pokedex } ) {
 
     let userDetailsArea;
     let userPokemonArray;
-    if(pokemonLikedByUser) userPokemonArray = <> <h1 className="on-black">YOUR LIKES:</h1> userPokemonArray = <PokemonArray pokedex = {pokedex} idArray={pokemonLikedByUser} pokemonPerPage={3} setLikes = {setPokemonLikedByUser}/> </>
+    if(pokemonLikedByUser) userPokemonArray = <> <h1 className="on-black">YOUR LIKES:</h1> <PokemonArray pokedex = {pokedex} idArray={pokemonLikedByUser} pokemonPerPage={3} pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser = {setPokemonLikedByUser}/> </>
     else userPokemonArray = <></>;
 
     let username;   //TODO: ar trb sa fie functie separata sa iei username din sessionStorage
@@ -50,9 +50,9 @@ function Test( { pokedex } ) {
         username = "";
     }
 
-    if (!apiResponse) userDetailsArea = <h1> fetching user data</h1>
+    if (!apiResponse || !pokemonLikedByUser) userDetailsArea = <h1> fetching user data</h1>
     else              userDetailsArea = apiResponse.data.filter(entry => entry.username != username).map(
-            entry => <li key={entry.username}> <h1 className="on-black">{entry.username}</h1>  <PokemonArray  pokedex={pokedex} idArray={entry.liked} pokemonPerPage={3} setLikes = {setPokemonLikedByUser}/> </li>
+            entry => <li key={entry.username}> <h1 className="on-black">{entry.username}</h1>  <PokemonArray  pokedex={pokedex} idArray={entry.liked} pokemonPerPage={3} pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser = {setPokemonLikedByUser}/> </li>
         );
 
     return (
