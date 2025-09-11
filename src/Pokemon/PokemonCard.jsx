@@ -29,7 +29,6 @@ function PokemonCard({ id, pokedex, pokemonLikedByUser, setPokemonLikedByUser })
     <h2 className="sub-title">Moves:</h2>
     {pokemonData.moves.length > 0 ? pokemonData.moves.map(move => <MoveInCard moveName={move.move.name} pokedex={pokedex} />): <></>}
     */
-    console.log("pokemon liked in pokemon card component: ", pokemonLikedByUser)
     return (
         <div className="pokemon-card">
             <a href={`/pokemon/${pokemonData.name}`}>

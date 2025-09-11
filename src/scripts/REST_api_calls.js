@@ -44,6 +44,26 @@ export async function get_user_teams() {
     return -1;
 }
 
+export async function get_specific_user_teams(user_id) {
+    const response = await fetch(`http://localhost:3000/api/profile/users/${user_id}/teams`);
+
+    if(response.status == 200) {
+        const body = await response.json();
+        return body;
+    }
+    return -1;
+}
+
+export async function get_specific_user_likes(user_id) {
+    const response = await fetch(`http://localhost:3000/api/profile/users/${user_id}/liked_pokemon`); 
+    if (response.status == 200) {
+        const body = await response.json();
+        return body;
+    }
+    return -1;
+}
+
+
 export async function get_username_teams(username) {
     
     const response = await fetch(`http://localhost:3000/api/profile/users/${username}/teams`);
@@ -199,6 +219,65 @@ export async function get_token_from_api(url, username, password) {
         alert(error);
     }
 }
+
+export async function remove_pokemon_from_team(team_id, pokemon_id, set_pokemon_array) {
+    const token = get_token_from_session_storage();
+    if(!token) { window.location.replace('./login'); return -1; }
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/team/${team_id}/pokemon/${pokemon_id}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': token
+            }
+        }); 
+        console.log(response.status);
+        if(response.status == 200) {
+            console.log("incercam sa schimbam starea");
+            set_pokemon_array(null); //So that the components that manage this state update it :3
+        }
+        else if (response.status == 401) {
+            sessionStorage.clear();
+            window.location.replace('./login');
+            return -1;
+        }
+        
+    } catch (error) {
+
+    }
+}
+
+export async function add_pokemon_to_team(team_id, pokemon_id, set_pokemon_array) {
+    const token = get_token_from_session_storage();
+    if(!token) { window.location.replace('./login'); return -1; }
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/team/${team_id}/pokemon/${pokemon_id}`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': token
+            }
+        }); 
+        console.log(response.status);
+        if(response.status == 201) {
+            set_pokemon_array(null); //So that the components that manage this state update it :3
+        }
+        else if (response.status == 401) {
+            sessionStorage.clear();
+            window.location.replace('./login');
+            return -1;
+        }
+        
+    } catch (error) {
+
+    }
+}
+
+
 
 export async function like_pokemon(pokemon_id) {
     const token = get_token_from_session_storage();

@@ -2,7 +2,7 @@ import React from 'react';
 import { get_username_teams } from '../scripts/REST_api_calls.js'
 import TeamCard from './TeamCard';
 import CreateTeam from './CreateTeam';
-function TeamCardArray( { propsUsername } ) {
+function TeamCardArray( { viewOnly, propsUsername , pokedex } ) {
     
     const [teamIDArray, setTeamIDArray] = React.useState(null);
     const [username, setUsername] = React.useState(null);
@@ -28,7 +28,7 @@ function TeamCardArray( { propsUsername } ) {
 
     const teamCards = teamIDArray.map((teamID) => 
         <li key = {teamID}>
-            <TeamCard propsTeamID={teamID} />
+            <TeamCard viewOnly={viewOnly} propsTeamID={teamID} pokedex={pokedex} />
         </li>
     );
     
@@ -36,7 +36,7 @@ function TeamCardArray( { propsUsername } ) {
         <div>
             <ul>
                 {teamCards}
-                <CreateTeam teamIDArray={teamIDArray} setTeamIDArray={setTeamIDArray} />
+                {!viewOnly ? <CreateTeam teamIDArray={teamIDArray} setTeamIDArray={setTeamIDArray} /> : <></>}
             </ul>
         </div>
     );

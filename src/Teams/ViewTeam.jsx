@@ -1,12 +1,14 @@
 import React from 'react';
 import { get_team, remove_team } from '../scripts/REST_api_calls.js';
+import PokemonInTeamArray from './PokemonInTeamArray.jsx';
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function ViewTeam( {teamID, setCurrentVisibleComponent } ) {
+function ViewTeam( {viewOnly, teamID, setCurrentVisibleComponent, pokemonIDS, setPokemonIDS, pokedex} ) {
     const [teamData, setTeamData] = React.useState(null);
+
 
     React.useEffect(() => {
         async function effect_func(){
@@ -20,13 +22,22 @@ function ViewTeam( {teamID, setCurrentVisibleComponent } ) {
     }, []);
 
     if(!teamData)   return (<h1> getting team data </h1>);
+
+    let interactionButtons = <></>;
+
+    if(!viewOnly){
+        interactionButtons = (<>
+            <button onClick={() => setCurrentVisibleComponent("EditTeam")}> Edit Team </button>
+            <button onClick={() => {remove_team(teamID); setCurrentVisibleComponent("RemovedTeam")}}> Remove Team </button>
+        </>);
+    }
     
     return(
     <div>
         <h1 className={"on-black"}> {teamData.teamReply[0].team} </h1>
         <p className={"on-black"}> {teamData.teamReply[0].team_description} </p>
-        <button onClick={() => setCurrentVisibleComponent("EditTeam")}> Edit Team </button>
-        <button onClick={() => {remove_team(teamID); setCurrentVisibleComponent("RemovedTeam")}}> Remove Team </button>
+        <PokemonInTeamArray viewOnly={viewOnly} teamID = {teamID} pokedex={pokedex} pokemonIDS={pokemonIDS}  setPokemonIDS={setPokemonIDS} />
+        {interactionButtons}
     </div>
     );
 }

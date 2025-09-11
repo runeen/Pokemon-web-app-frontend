@@ -43,7 +43,6 @@ function PokemonArray({ pokedex, idArray, pokemonLikedByUser, setPokemonLikedByU
   );
   
 
-  console.log("liked pokemon in pokemon array: ", pokemonLikedByUser)
   const visiblePokemonCards = visiblePokemon.map((pokemonId) => (
     <li key = {pokemonId}>
       <PokemonCard key={pokemonId} id={pokemonId} pokedex={pokedex} pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser={setPokemonLikedByUser}/>

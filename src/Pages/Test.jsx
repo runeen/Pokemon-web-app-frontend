@@ -58,7 +58,7 @@ function Test( { pokedex } ) {
     return (
         <div>
         <Nav resource={"pokemon"} defaultValue={1} />
-        <TeamCardArray username={"uhm_mhm"} />
+        <TeamCardArray viewOnly={false} username={"uhm_mhm"} pokedex={pokedex}/>
         {userPokemonArray}
         {userDetailsArea}
         <TeamCard team_id={30} pokedex={pokedex} setPokemonLikedByUser={setPokemonLikedByUser}/>
