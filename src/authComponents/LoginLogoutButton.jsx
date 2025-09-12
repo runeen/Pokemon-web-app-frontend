@@ -43,14 +43,16 @@ function LoginLogoutButton() {
     if(username && loggedIn) {
         return(
         <>
-        <h2 className="on-black">You are logged in as {username}</h2> <button onClick={() => {sessionStorage.clear(); setUsername("");}}>Log out.</button>
+        <h2 className="on-black">You are logged in as {username}</h2> 
+        <button onClick={() => {sessionStorage.clear(); setUsername(""); window.location.reload();}}>Log out.</button>
         </>)
     }
 
     if (!loggedIn){
         return(
             <>
-            <h2 className="on-black">You are not logged in.</h2> <button onClick={() => {window.location.replace("/login");}}>Log in.</button>
+            <h2 className="on-black">You are not logged in.</h2> 
+            <button onClick={() => {window.location.replace("/login");}}>Log in.</button>
             </>
         )
     }

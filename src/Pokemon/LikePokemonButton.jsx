@@ -16,9 +16,12 @@ function LikePokemonButton( {pokemon_id, pokemonLikedByUser, setPokemonLikedByUs
             setLoggedIn(true);
         }
     }
-    
-    if(check_pokemon_liked(pokemon_id, pokemonLikedByUser) && !liked)   setLiked(true);
-    if(!check_pokemon_liked(pokemon_id, pokemonLikedByUser) && liked)   setLiked(false);
+
+    //TODO: In PokemonPage nu primim pokemonLikedByUser, afla ce se intampla
+    if(loggedIn) {
+        if(check_pokemon_liked(pokemon_id, pokemonLikedByUser) && !liked)   setLiked(true);
+        if(!check_pokemon_liked(pokemon_id, pokemonLikedByUser) && liked)   setLiked(false);
+    }
 
     if(loggedIn == false) return <></>;
 

@@ -3,13 +3,19 @@ import PokemonArray from "./PokemonArray";
 import PokemonCard from "./PokemonCard";
 import Nav from "./Nav";
 import LinkToResourcePage from "../LinkToResourcePage";
-import { like_pokemon } from "../scripts/REST_api_calls";
+import { get_liked_pokemon_from_session_storage, like_pokemon } from "../scripts/REST_api_calls";
 
-
+//TODO: Poate ar fi o idee sa avem doua pagini diferite daca esti logat sau nu...
+//      Ca e complicat sa avem toata logica aici
 function PokemonPage({ pokedex, id }) {
 
   const [pokemonData, setPokemonData] = React.useState(null);
+  const [pokemonLikedByUser, setPokemonLikedByUser] = React.useState(null);
   const [pokemonSpecies, setPokemonSpecies] = React.useState(null);
+    
+  if(pokemonLikedByUser == null) {
+    setPokemonLikedByUser(get_liked_pokemon_from_session_storage());
+  }
 
   React.useEffect(() => {
     async function getPokemonData() {
@@ -34,7 +40,7 @@ function PokemonPage({ pokedex, id }) {
     getPokemonData();
   }, [id, pokedex, pokemonData, pokemonSpecies]);
 
-  if(!id) return (<PokemonArray pokedex={pokedex} idArray={[1]} pokemonPerPage={10}/>);
+  if(!id) return (<></>);
 
   if (!pokemonData || !pokemonSpecies) {
     return <div className={"on-black"}>Loading Pokémon data, ID= {id}</div>;
@@ -49,7 +55,7 @@ function PokemonPage({ pokedex, id }) {
 
   return (
     <div className="page pokemon-page">
-        <PokemonCard pokedex={pokedex} id={id}/>
+        <PokemonCard pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser={setPokemonLikedByUser} pokedex={pokedex} id={id} />
         <p>
           {speciesFlavorText}
         </p>

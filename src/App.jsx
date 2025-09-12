@@ -9,6 +9,7 @@ import Test from './Pages/Test'
 import Login from './authComponents/login';
 import Register from './authComponents/Register'
 import ResourceDetailsPage from './Pages/ResourceDetailsPage';
+import EditProfilePage from './Pages/EditProfilePage';
 import UserPage from './Pages/UserPage';
 
 
@@ -21,6 +22,7 @@ function App() {
       <Route path="/login" element = {<Login />} />
       <Route path="/register" element = {<Register />} />
       <Route path="/" element= {<Test pokedex = {P}/>} />
+      <Route path="/edit_profile" element={<EditProfilePage pokedex={P} />} />
       <Route path="/user/:userID" element={<UserPage pokedex={P} />} />
       <Route path="/pokemon" element= {<ResourceDetailsPage pokedex = {P} resource={"pokemon"}/>} />
       <Route path="/pokemon/:id" element= {<ResourceDetailsPage pokedex = {P} resource={"pokemon"}/>} />
