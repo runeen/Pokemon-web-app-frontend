@@ -44,6 +44,17 @@ export async function get_user_teams() {
     return -1;
 }
 
+export async function get_users() {
+    const response = await fetch(`http://localhost:3000/api/profile/users`);
+
+    if(response.status == 200) {
+        const body = await response.json();
+        return body;
+    }
+    return -1;
+}
+
+
 export async function get_specific_user_teams(user_id) {
     const response = await fetch(`http://localhost:3000/api/profile/users/${user_id}/teams`);
 
@@ -346,3 +357,5 @@ export async function remove_like_pokemon(pokemon_id) {
 
     return get_liked_pokemon_from_session_storage(); 
 }
+
+

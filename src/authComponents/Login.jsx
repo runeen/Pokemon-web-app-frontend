@@ -19,7 +19,7 @@ function Login(){
     const handleSubmit = async e => {
         e.preventDefault();
         await login(`http://localhost:3000/api/auth/login`, username, password);
-        window.location.replace('/');
+        window.history.go(-1);
     }
 
 

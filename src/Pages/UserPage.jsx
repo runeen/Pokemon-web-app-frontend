@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 function UserPage( {pokedex} ) {
     const [pokemonLikedByUser, setPokemonLikedByUser] = React.useState(null);
     const { userID } = useParams();
+
+    if(!isNaN(parseInt(userID)))    window.history.go(-1);
     const [likedPokemon, setLikedPokemon] = React.useState(null);
 
     if(pokemonLikedByUser == null){
@@ -20,6 +22,12 @@ function UserPage( {pokedex} ) {
         };
         temp();
     }, []);
+    
+    console.log(likedPokemon);
+
+    if(likedPokemon == -1) {
+        window.history.go(-1);
+    }
 
     const teamsArr = (<TeamCardArray viewOnly={true} propsUsername={userID} pokedex={pokedex} />); 
 
@@ -31,7 +39,6 @@ function UserPage( {pokedex} ) {
     } catch (error) {
         console.log("no username in storage");
     }
-
 
     if(userID == storageUsername) {
         editProfileRedirect = (
@@ -46,9 +53,9 @@ function UserPage( {pokedex} ) {
                           pokemonLikedByUser={pokemonLikedByUser} 
                           pokemonPerPage={3} setPokemonLikedByUser={setPokemonLikedByUser} />);
     }
-
+    
     return(<>
-        <Nav resource={'pokemon'} defaultValue = {1} />
+        <Nav resource={'user'} defaultValue = {userID} />
         <h1 className={"on-black"}> {userID} </h1>
         <h2 className={"on-black"}> Teams: </h2>
         {teamsArr} 

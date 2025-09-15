@@ -41,8 +41,10 @@ function PokemonInTeamElement( {viewOnly, teamID ,pokemonID, setPokemonIDS, poke
 
     return(
     <li key={pokemonID}>
-        <img className="pokemon-image" src={imgSrc}></img>  
-        <h3 className="on-black">{pokemonName}</h3> 
+        <a href={`/pokemon/${pokemonID}`}>
+            <img className="pokemon-image" src={imgSrc}></img>  
+            <h3 className="on-black">{pokemonName}</h3> 
+        </a>
         {!viewOnly ? <button onClick={() => {remove_pokemon_from_team(teamID, pokemonID, setPokemonIDS)}}> Remove From Team </button> : <></>}
     </li>);
 }

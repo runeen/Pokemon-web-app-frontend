@@ -14,6 +14,7 @@ function Nav( {resource, defaultValue} ) {
     return(
         <div className="nav">
             <div className="go-to">
+                <button onClick={() => {window.location.replace('/');}}>Go to home</button>
                 <h1 className="on-black">Go to a specific {resource} page:</h1>
                 <form method="post" onSubmit={handleSearchSubmit}>
                     <textarea name="navTextArea" defaultValue={defaultValue} rows={1} columns={40}></textarea>

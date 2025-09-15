@@ -1,36 +1,39 @@
 import React from 'react';
 import PokemonArray from '../Pokemon/PokemonArray.jsx';
-import PokemonCard from '../Pokemon/PokemonCard.jsx';
+import {get_liked_pokemon_from_session_storage} from '../scripts/REST_api_calls.js';
 
 function AbilityPage({ pokedex, id }) {
 
     const [abilityData, setAbilityData] = React.useState(null);
+    const [likedPokemon, setLikedPokemon] = React.useState(null);
 
-        React.useEffect(() => {
-            async function getAbilityData() {
-                if (abilityData == null) {
+    if(!likedPokemon) {
+        setLikedPokemon(get_liked_pokemon_from_session_storage());
+    }
+
+
+    React.useEffect(() => {
+        async function getAbilityData() {
+            if (abilityData == null) {
                 const response = await pokedex.getAbilityByName(id);
                 console.log("fetched data");
                 setAbilityData(response);
-                }
             }
-            getAbilityData();
-        }, [pokedex, abilityData, id]);
+        }
+        getAbilityData();
+    }, [pokedex, abilityData, id]);
 
     if (!abilityData) {
         return (<div>Loading ability...</div>);
     }
 
-    //const pokemonList = abilityData.pokemon.map(pokemon => <PokemonCard id={pokemon.pokemon.name} pokedex={pokedex} />)
-
     const pokemonList = <PokemonArray idArray={
         abilityData.pokemon.map(pokemon => pokemon.pokemon.name)
-     } pokedex={pokedex} pokemonPerPage={3}/>
+     } pokedex={pokedex} pokemonPerPage={3} pokemonLikedByUser={likedPokemon} setPokemonLikedByUser={setLikedPokemon}/>
 
     const effectEntry = abilityData.effect_entries.find(
         entry => entry.language.name == "en"
     );
-
 
     return(
         <div className='ability-page'>

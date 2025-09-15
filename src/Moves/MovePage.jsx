@@ -1,10 +1,17 @@
 import React from 'react';
 import PokemonCard from '../Pokemon/PokemonCard.jsx';
 import PokemonArray from '../Pokemon/PokemonArray.jsx';
+import {get_liked_pokemon_from_session_storage} from '../scripts/REST_api_calls.js';
 
 function MovePage({ pokedex, id }) {
 
     const [moveData, setMoveData] = React.useState(null);
+    const [pokemonLikedByUser, setPokemonLikedByUser] = React.useState(null);
+
+    if(!pokemonLikedByUser) {
+        setPokemonLikedByUser(get_liked_pokemon_from_session_storage());
+    }
+
 
         React.useEffect(() => {
             async function getMoveData() {
@@ -25,7 +32,7 @@ function MovePage({ pokedex, id }) {
 
     const pokemonList = <PokemonArray idArray={
         moveData.learned_by_pokemon.map(pokemon => pokemon.name)
-     } pokedex={pokedex} pokemonPerPage={3}/>
+     } pokedex={pokedex} pokemonPerPage={3} pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser={setPokemonLikedByUser}/>
 
 
     const effectEntry = moveData.effect_entries.find(
