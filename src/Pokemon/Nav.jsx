@@ -12,16 +12,18 @@ function Nav( {resource, defaultValue} ) {
     }
 
     return(
-        <div className="nav">
-            <div className="go-to">
-                <button onClick={() => {window.location.replace('/');}}>Go to home</button>
-                <h1 className="on-black">Go to a specific {resource} page:</h1>
-                <form method="post" onSubmit={handleSearchSubmit}>
-                    <textarea name="navTextArea" defaultValue={defaultValue} rows={1} columns={40}></textarea>
-                    <button type="submit">Go to {resource}</button>
+        <div className="px-3 sm:fixed sm:sticky sm:top-0 w-full py-4 bg-gray-800 align-center justify-evenly md:justify-between flex flex-col sm:flex-row items-center sm:items-end font-light text-white ">
+            <button className="m-2 sm:m-0 bg-white p-1 text-black rounded-sm" onClick={() => {window.location.replace('/');}}>Home</button>
+            <div className="flex flex-col sm:flex-row align-text-bottom">
+                <form className="flex justify-center text-bottom h-6 sm:h-min" method="post" onSubmit={handleSearchSubmit}>
+                    <p className="collapse sm:visible text-bottom">Go to a specific {resource} page:</p>
+                    <input className="bg-gray-200 mx-3 my-1 h-5 w-35 sm:w-40 overflow-x-hidden resize-none text-black " name="navTextArea" defaultValue={defaultValue} type="text"></input>
+                    <button className="" type="submit">go</button>
                 </form>
             </div>
-            <LoginLogoutButton />
+            <div>
+                <LoginLogoutButton />
+            </div>
         </div>
     )
 
