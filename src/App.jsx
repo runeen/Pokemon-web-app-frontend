@@ -18,7 +18,7 @@ function App() {
   const P = new Pokedex;
 
   return (
-  <div className="Title">
+  <div className="bg-gray-900 text-white">
     <Routes>
       <Route path="/login" element = {<Login />} />
       <Route path="/register" element = {<Register />} />

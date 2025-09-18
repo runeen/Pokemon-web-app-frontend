@@ -16,7 +16,7 @@ function EditProfilePage( { pokedex } ) {
     if (pokemonLikedByUser) {
         userPokemonArray = (
             <PokemonArray pokedex = {pokedex} idArray={pokemonLikedByUser} pokemonLikedByUser={pokemonLikedByUser}
-                          setPokemonLikedByUser={setPokemonLikedByUser} pokemonPerPage={3} />
+                          setPokemonLikedByUser={setPokemonLikedByUser} pokemonPerPage={10} />
     );}
 
     let username;

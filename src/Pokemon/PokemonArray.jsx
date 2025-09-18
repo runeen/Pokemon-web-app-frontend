@@ -48,13 +48,16 @@ function PokemonArray({ pokedex, idArray, pokemonLikedByUser, setPokemonLikedByU
       <PokemonCard key={pokemonId} id={pokemonId} pokedex={pokedex} pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser={setPokemonLikedByUser}/>
     </li>
   ));
-  
+
+  const buttonStyles = "mx-3 p-1 px-2 hover:text-gray-300 font-medium"
+
   let pageSelectElements = <></>;
   if (maxPage > 0) {
-      pageSelectElements = (<>
+      pageSelectElements = (<div className={"flex flex-row items-center"} >
+
         {lastVisible && (
-        <button className={"scroll-button"} onClick={handleLastButton}>
-          Last Page
+        <button className={buttonStyles} onClick={handleLastButton}>
+           Back 
         </button>
       )}
 
@@ -63,23 +66,18 @@ function PokemonArray({ pokedex, idArray, pokemonLikedByUser, setPokemonLikedByU
       </p>
 
       {nextVisible && (
-        <button className={"scroll-button"} onClick={handleNextButton}>
-          Next Page
+        <button className={buttonStyles} onClick={handleNextButton}>
+          Next
         </button>
       )}
-    </>);
+    </div>);
   }
 
   return (
-    <div className="pokemon-array">
-      <div className="page">
-        <div>
-          <ul>{visiblePokemonCards}</ul>
-        </div>
-      </div>
-
-      {pageSelectElements}
-            
+   <div className="">
+      <div key={"1"} className="flex justify-center">{pageSelectElements} </div>
+      <ul className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'}>{visiblePokemonCards}</ul>
+      <div key={"2"} className="flex justify-center">{pageSelectElements} </div>
     </div>
   );
 }

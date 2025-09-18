@@ -24,12 +24,14 @@ function LikePokemonButton( {pokemon_id, pokemonLikedByUser, setPokemonLikedByUs
     }
 
     if(loggedIn == false) return <></>;
+    
+    const buttonStyles = "col-span-2 my-1 text-lg mx-2"
 
     if(!liked) return (
-        <button onClick={async () => {setPokemonLikedByUser(await like_pokemon(pokemon_id)); setLiked(true);}} > LIKE POKEMON</button>
+        <button className={`${buttonStyles} hover:text-blue-100`} onClick={async () => {setPokemonLikedByUser(await like_pokemon(pokemon_id)); setLiked(true);}} > &#9825; </button>
     )
     else return (
-        <button onClick={async () => {setPokemonLikedByUser(await remove_like_pokemon(pokemon_id)); setLiked(false);}}>REMOVE LIKE</button>
+        <button className={`${buttonStyles} hover:text-red-200`} onClick={async () => {setPokemonLikedByUser(await remove_like_pokemon(pokemon_id)); setLiked(false);}}> &#9829; </button>
     )
 
 };

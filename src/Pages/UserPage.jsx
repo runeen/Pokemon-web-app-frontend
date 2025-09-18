@@ -51,7 +51,7 @@ function UserPage( {pokedex} ) {
         pokemonArr = (
             <PokemonArray pokedex={pokedex} idArray={likedPokemon.map(entry => entry.pokemon_id)} 
                           pokemonLikedByUser={pokemonLikedByUser} 
-                          pokemonPerPage={3} setPokemonLikedByUser={setPokemonLikedByUser} />);
+                          pokemonPerPage={24} setPokemonLikedByUser={setPokemonLikedByUser} />);
     }
     
     return(<>
