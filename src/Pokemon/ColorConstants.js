@@ -1,0 +1,41 @@
+export const BORDER_COLOR_TYPES = {
+        'normal': "border-orange-400",
+        'fighting': "border-red-400",
+        'rock': "border-grau-400",
+        'steel': "border-slate-500",
+        'ghost': "border-indigo-400",
+        'flying': "border-sky-400",
+        'psychic': "border-fuchsia-400",
+        'fairy': "border-pink-300",
+        'ice': "border-blue-300",
+        'dark': "border-yellow-800",
+        'bug': "border-lime-400",
+        'fire': "border-red-500",
+        'water': "border-blue-400",
+        'electric': "border-amber-300",
+        'poison': "border-fuchsia-800",
+        'ground': "border-yellow-500",
+        'dragon': "border-violet-300",
+        'grass': "border-green-400"
+    };
+
+export const SHADOW_COLOR_TYPES = {
+        'normal': "shadow-orange-400",
+        'fighting': "shadow-red-400",
+        'rock': "shadow-gray-400",
+        'steel': "shadow-slate-500",
+        'ghost': "shadow-indigo-400",
+        'flying': "shadow-sky-400",
+        'psychic': "shadow-fuchsia-400",
+        'fairy': "shadow-pink-300",
+        'ice': "shadow-blue-300",
+        'dark': "shadow-yellow-800",
+        'bug': "shadow-lime-400",
+        'fire': "shadow-red-500",
+        'water': "shadow-blue-400",
+        'electric': "shadow-amber-300",
+        'poison': "shadow-fuchsia-800",
+        'ground': "shadow-yellow-500",
+        'dragon': "shadow-violet-300",
+        'grass': "shadow-green-400"
+    };

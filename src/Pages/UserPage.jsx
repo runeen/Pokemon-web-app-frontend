@@ -51,17 +51,19 @@ function UserPage( {pokedex} ) {
         pokemonArr = (
             <PokemonArray pokedex={pokedex} idArray={likedPokemon.map(entry => entry.pokemon_id)} 
                           pokemonLikedByUser={pokemonLikedByUser} 
-                          pokemonPerPage={24} setPokemonLikedByUser={setPokemonLikedByUser} />);
+                          pokemonPerPage={25} setPokemonLikedByUser={setPokemonLikedByUser} />);
     }
     
     return(<>
         <Nav resource={'user'} defaultValue = {userID} />
-        <h1 className={"on-black"}> {userID} </h1>
-        <h2 className={"on-black"}> Teams: </h2>
-        {teamsArr} 
-        <h2 className={"on-black"}> Liked Pokemon: </h2>
-        {pokemonArr}
-        {editProfileRedirect}
+        <div className={"flex flex-col items-center"}>
+            <h1 className={""}> {userID} </h1>
+            <h2 className={""}> Teams: </h2>
+            {teamsArr} 
+            <h2 className={""}> Liked Pokemon: </h2>
+            {pokemonArr}
+            {editProfileRedirect}
+        </div>
     </>);
 
 }

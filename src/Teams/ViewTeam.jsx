@@ -33,8 +33,8 @@ function ViewTeam( {viewOnly, teamID, setCurrentVisibleComponent, pokemonIDS, se
     }
     
     return(
-    <div>
-        <h1 className={"on-black"}> {teamData.teamReply[0].team} </h1>
+    <div className={"text-center "}>
+        <h1 className={"text-xl font-semibold"}> {teamData.teamReply[0].team} </h1>
         <p className={"on-black"}> {teamData.teamReply[0].team_description} </p>
         <PokemonInTeamArray viewOnly={viewOnly} teamID = {teamID} pokedex={pokedex} pokemonIDS={pokemonIDS}  setPokemonIDS={setPokemonIDS} />
         {interactionButtons}

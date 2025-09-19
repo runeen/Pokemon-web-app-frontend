@@ -12,13 +12,11 @@ function Nav( {resource, defaultValue} ) {
     }
 
     return(
-        <div className="px-3 sm:fixed sm:sticky sm:top-0 w-full py-4 bg-gray-800 align-center justify-evenly md:justify-between flex flex-col sm:flex-row items-center sm:items-end font-light text-white ">
-            <button className="m-2 sm:m-0 bg-white p-1 text-black rounded-sm" onClick={() => {window.location.replace('/');}}>Home</button>
+        <div className="px-3 h-15 sm:sticky sm:top-0 max-w-screen py-4 bg-gray-800 justify-between sm:justify-between flex flex-row items-end font-light text-white ">
+            <button className="bg-white p-1 text-black rounded-sm text-xs" onClick={() => {window.location.replace('/');}}>Home</button>
             <div className="flex flex-col sm:flex-row align-text-bottom">
-                <form className="flex justify-center text-bottom h-6 sm:h-min" method="post" onSubmit={handleSearchSubmit}>
-                    <p className="collapse sm:visible text-bottom">Go to a specific {resource} page:</p>
-                    <input className="bg-gray-200 mx-3 my-1 h-5 w-35 sm:w-40 overflow-x-hidden resize-none text-black " name="navTextArea" defaultValue={defaultValue} type="text"></input>
-                    <button className="" type="submit">go</button>
+                <form className="text-bottom w-full h-full sm:h-min p-0" method="post" onSubmit={handleSearchSubmit}>
+                    <input className="bg-gray-200 align-self-end mx-4 h-5 w-25 sm:w-40 overflow-x-hidden resize-none text-black " name="navTextArea" defaultValue={"go to " + resource} type="text"></input>
                 </form>
             </div>
             <div>

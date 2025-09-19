@@ -16,7 +16,7 @@ function LoginLogoutButton() {
     const [username, setUsername] = React.useState(null);
     const [loggedIn, setLoggedIn] = React.useState(false);
 
-    const divStyles = "m-2 sm:m-0";
+    const divStyles = "";
 
     if (!loggedIn) {
         try {
@@ -44,17 +44,16 @@ function LoginLogoutButton() {
 
     if(username && loggedIn) {
         return(
-        <div className={`inline-flex flex-col items-center sm:flex-row sm:items-center ${divStyles}`}>
-            <h2 className="collapse sm:visible mx-0 sm:mx-4 text-right">User: {username}</h2> 
-            <p className={'sm:collapse sm:w-0 sm:h-0 text-center'}>User: {username}</p>
-            <button className={"m-2 sm:m-0 bg-white p-1 text-black rounded-sm w-fit"} onClick={() => {sessionStorage.clear(); setUsername(""); window.location.reload();}}>Log out.</button>
+        <div className={`overflow-clip sm:inline-flex sm:flex-row items-center ${divStyles}`}>
+            <h2 className="hidden sm:inline mx-0 sm:mx-4 text-right">User: {username}</h2> 
+            <button className={"bg-white p-1 text-black rounded-sm text-xs"} onClick={() => {sessionStorage.clear(); setUsername(""); window.location.reload();}}>Log out.</button>
         </div>)
     }
 
     if (!loggedIn){
         return(
         <div className={divStyles}>
-            <button className={"m-2 sm:m-0 bg-white p-1 text-black rounded-sm"} onClick={() => {window.location.replace("/login");}}>Log in.</button>
+            <button className={"m-0 sm:m-0 bg-white p-1 text-black rounded-sm text-xs"} onClick={() => {window.location.replace("/login");}}>Log in.</button>
         </div>
         )
     }

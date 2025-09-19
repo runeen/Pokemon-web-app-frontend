@@ -76,7 +76,7 @@ function PokemonArray({ pokedex, idArray, pokemonLikedByUser, setPokemonLikedByU
   return (
    <div className="">
       <div key={"1"} className="flex justify-center">{pageSelectElements} </div>
-      <ul className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'}>{visiblePokemonCards}</ul>
+      <ul className={'flex sm:fle-none xflex-row max-w-screen overflow-y-scroll sm:overflow-clip sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'}>{visiblePokemonCards} </ul>
       <div key={"2"} className="flex justify-center">{pageSelectElements} </div>
     </div>
   );
