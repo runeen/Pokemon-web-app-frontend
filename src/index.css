@@ -1,3 +1,6 @@
+@import "tailwindcss";
+
+/*
 body {
   background-color: black;
   font-family: Arial;
@@ -27,7 +30,7 @@ form {
 input {
   margin-bottom: 30px;
 }
-
+*/
 .pokemon-array {
   display: flex;
   flex-direction: row;
@@ -44,7 +47,7 @@ input {
 .scroll-button {
   height: fit-content;
 }
-
+/*
 a:link {
   text-decoration: none;
   color: inherit;
@@ -70,7 +73,7 @@ p {
   font-size: large;
   padding: 40px;
 }
-
+*/
 .title::first-letter {
   text-transform: capitalize;
 }
@@ -218,12 +221,12 @@ p {
 img.sprite {
   margin: 10px;
 }
-
+/*
 hr {
   width: 80%;
   color: white;
 }
-
+*/
 .users {
     padding: 10px;
     margin: 20px;

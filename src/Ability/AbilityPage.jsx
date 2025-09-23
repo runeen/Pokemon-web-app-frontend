@@ -29,18 +29,18 @@ function AbilityPage({ pokedex, id }) {
 
     const pokemonList = <PokemonArray idArray={
         abilityData.pokemon.map(pokemon => pokemon.pokemon.name)
-     } pokedex={pokedex} pokemonPerPage={3} pokemonLikedByUser={likedPokemon} setPokemonLikedByUser={setLikedPokemon}/>
+     } pokedex={pokedex} pokemonPerPage={20} pokemonLikedByUser={likedPokemon} setPokemonLikedByUser={setLikedPokemon}/>
 
     const effectEntry = abilityData.effect_entries.find(
         entry => entry.language.name == "en"
     );
 
     return(
-        <div className='ability-page'>
-            <h1 className="title">{abilityData.name}</h1>
-            <p>{effectEntry.effect}</p>
-            <h2>Pokemon with this ability:</h2>
-            <div className="pokemon-array">
+        <div className='flex flex-col text-center items-center gap-6 mt-4'>
+            <h1 className="text-2xl font-semibold capitalize">{abilityData.name}</h1>
+            <p className="text-justify text-md mx-6">{effectEntry.effect}</p>
+            <h2 className="text-xl">Pokemon with this ability:</h2>
+            <div className="">
                 {pokemonList}
             </div>
         </div>

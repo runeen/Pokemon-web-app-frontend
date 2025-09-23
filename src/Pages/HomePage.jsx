@@ -26,11 +26,17 @@ function HomePage( { pokedex } ) {
         setPokemonLikedByUser(get_liked_pokemon_from_session_storage());
     }
 
-    const editProfile = (<><button onClick={() => {window.location.replace('/edit_profile');}}>Edit Your Profile</button></>);
+    const editProfile = (<a className={"w-full text-center my-2 font-semibold hover:text-gray-400"} href='edit_profile'>Edit Your Profile</a>);
     if(!randomPokemonIDS) {
         let tempPokemonIDS = [];
-        for(let i = 0; i < 48; i++) {
-            tempPokemonIDS.push(Math.floor(Math.random() * 1024) + 1);
+        while(tempPokemonIDS.length < 90) {
+            const randomPokemon = Math.floor(Math.random() * 1024) + 1;
+            if(!tempPokemonIDS.includes(randomPokemon)) {
+                tempPokemonIDS.push(randomPokemon);
+            }
+            else {
+
+            }
         }
         setRandomPokemonIDS(tempPokemonIDS);
     }
@@ -39,26 +45,35 @@ function HomePage( { pokedex } ) {
     if(userIDS && userIDS != -1) {
         console.log(userIDS);
         userProfilesList = (
-            <ul>
+            <ul className={"flex flex-wrap items-stretch mx-5"}>
                 {userIDS.map((entry => 
                 <li key={entry.id}>
-                    <LinkToResourcePage resource="user" id={entry.username} name={entry.username} className={"users"} />
+                    <LinkToResourcePage resource="user" id={entry.username} name={entry.username} className={"m-2 font-medium hover:text-gray-300"} />
                 </li>))}
             </ul>
         );
     }
 
     return (
-        <>
+        <div>
             <Nav resource="user" defaultValue={""} />
-            <h1 className={"title on-black"}>POKEMON REACT</h1>
-            <h2 className={"title on-black"}>Random Pokemon: </h2>
-            <PokemonArray pokedex={pokedex} idArray={randomPokemonIDS} pokemonLikedByUser={pokemonLikedByUser}
-                          setPokemonLikedByUser={setPokemonLikedByUser} pokemonPerPage={3}/>
-            <h2 className={"title on-black"}>Users: </h2>
-            {userProfilesList}
-            {loggedIn && editProfile}
-        </>
+            <div className="max-h-screen max-w-screen">
+                <h1 className={"width-full text-center text-3xl font-semibold py-5"}>POKEMON REACT</h1>
+                <hr className={""}></hr>
+                <div className={"flex flex-wrap sm:flex-nowrap justify-items-center dividy-y sm:felx-col sm:align-around sm:divide-x"}>
+                    <div className={"w-full sm:w-80/100 p-5"}>
+                        <h2 className={"text-center font-semibold text-xl"}>Random Pokemon: </h2>
+                        <PokemonArray pokedex={pokedex} idArray={randomPokemonIDS} pokemonLikedByUser={pokemonLikedByUser}
+                                      setPokemonLikedByUser={setPokemonLikedByUser} pokemonPerPage={30}/>
+                    </div>
+                    <div className={"w-full sm:w-20/100 p-5 flex flex-col items-center"}>
+                        <h2 className={"text-center font-semibold text-xl"}>Users: </h2>
+                        {userProfilesList}
+                        {loggedIn && editProfile}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 

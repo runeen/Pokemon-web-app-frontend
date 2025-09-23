@@ -16,6 +16,8 @@ function LoginLogoutButton() {
     const [username, setUsername] = React.useState(null);
     const [loggedIn, setLoggedIn] = React.useState(false);
 
+    const divStyles = "";
+
     if (!loggedIn) {
         try {
             if(sessionStorage.getItem("token"))  setLoggedIn(true);
@@ -42,18 +44,17 @@ function LoginLogoutButton() {
 
     if(username && loggedIn) {
         return(
-        <>
-        <h2 className="on-black">You are logged in as {username}</h2> 
-        <button onClick={() => {sessionStorage.clear(); setUsername(""); window.location.reload();}}>Log out.</button>
-        </>)
+        <div className={`overflow-clip sm:inline-flex sm:flex-row items-center ${divStyles}`}>
+            <h2 className="hidden sm:inline mx-0 sm:mx-4 text-right">User: {username}</h2> 
+            <button className={"bg-white p-1 text-black rounded-sm text-xs"} onClick={() => {sessionStorage.clear(); setUsername(""); window.location.reload();}}>Log out.</button>
+        </div>)
     }
 
     if (!loggedIn){
         return(
-            <>
-            <h2 className="on-black">You are not logged in.</h2> 
-            <button onClick={() => {window.location.replace("/login");}}>Log in.</button>
-            </>
+        <div className={divStyles}>
+            <button className={"m-0 sm:m-0 bg-white p-1 text-black rounded-sm text-xs"} onClick={() => {window.location.replace("/login");}}>Log in.</button>
+        </div>
         )
     }
 }

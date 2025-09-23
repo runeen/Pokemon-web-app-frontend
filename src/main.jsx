@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 console.log("eu sunt cel care scrie");
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter className={"h-full w-full"}>
     <App />
   </BrowserRouter>,
 )

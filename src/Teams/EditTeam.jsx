@@ -38,15 +38,14 @@ function EditTeam( {teamID, setCurrentVisibleComponent } ) {
   }, []);
 
   return(
-    <div>
-      <h1 className={"title on-black"}>Edit Team:</h1>
-      <form onSubmit={(e) => {e.preventDefault(); tryEditTeam(name, description, teamID, setCurrentVisibleComponent); }}>
-        <label className={"on-black"}>Name: </label>
-        <input value={name} name="name" placeholder="Team" onChange={e => setName(e.target.value)} />
-        <label className={"on-black"}>Description: </label>
-        <textarea value={description} name="description" placeholder="Aspirations and long term goals"  onChange={e => setDescription(e.target.value)} rows={5} columns={200} wrap={"hard"}/>
-        <button type="submit">
-          Edit New Team
+    <div className={"m-2 h-100 text-center border-2 border-gray-700 rounded-xl"}>
+      <form className={"flex flex-col items-center gap-2"} onSubmit={(e) => {e.preventDefault(); tryEditTeam(name, description, teamID, setCurrentVisibleComponent); }}>
+        <label className={"my-4"}>Name: </label>
+        <input className={"w-40 bg-gray-300 text-black"} value={name} name="name" placeholder="Team" onChange={e => setName(e.target.value)} />
+        <label className={"my-4"}>Description: </label>
+        <textarea className={"w-50 bg-gray-300 text-black resize-none"} value={description} name="description" placeholder="Aspirations and long term goals"  onChange={e => setDescription(e.target.value)} rows={5} columns={200} wrap={"hard"}/>
+        <button className={"my-6 hover:text-blue-100"} type="submit">
+            Save changes
         </button>
       </form>
     </div>
