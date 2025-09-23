@@ -6,10 +6,10 @@ function AddPokemonToTeam( { teamID, setPokemonIDS } ) {
     
 
     return (
-        <div>
-            <form onSubmit={(e) => {e.preventDefault(); add_pokemon_to_team(teamID, pokemonToAdd, setPokemonIDS);}}>
-                <input size={"9"} value={pokemonToAdd} name="pokemonID" placeholder="Pokemon ID" onChange={e => setPokemonToAdd(e.target.value)} />
-                <button type="submit">Add Pokemon </button>
+        <div className="flex flex-col mx-3 h-40 justify-center">
+            <form className={"flex flex-col gap-2"} onSubmit={(e) => {e.preventDefault(); add_pokemon_to_team(teamID, pokemonToAdd, setPokemonIDS);}}>
+                <input className={"bg-zinc-900"} size={"9"} value={pokemonToAdd} name="pokemonID" placeholder="Pokemon ID" onChange={e => setPokemonToAdd(e.target.value)} />
+                <button className={"hover:text-blue-100"} type="submit">Add Pokemon </button>
             </form>
         </div>
     );
@@ -46,12 +46,12 @@ function PokemonInTeamElement( {viewOnly, teamID ,pokemonID, setPokemonIDS, poke
     }
 
     return(
-    <li className={`border-2 ${borderColor} shadow-md ${shadowColor} flex-none rounded-md w-30 h-40 flex flex-col align-middle text-center`} >
+    <li className={`border-2 ${borderColor} shadow-md ${shadowColor} flex-none rounded-md w-30 h-45 flex flex-col align-middle text-center`} >
         <a className={"flex flex-col items-center"} href={`/pokemon/${pokemonID}`}>
-            <img className={`bg-gray-700 shadow-lg rounded-md size-20 my-5 mx-3`} src={pokemonData.sprites.front_default}></img>  
-            <p className="">{pokemonData.name}</p> 
+            <p className="capitalize my-2">{pokemonData.name}</p> 
+            <img className={`bg-gray-700 shadow-lg rounded-md size-20 my-2 mx-3`} src={pokemonData.sprites.front_default}></img>  
         </a>
-        {!viewOnly ? <button onClick={() => {remove_pokemon_from_team(teamID, pokemonID, setPokemonIDS)}}> Remove From Team </button> : <></>}
+        {!viewOnly ? <button className={"hover:text-red-200 my-2"} onClick={() => {remove_pokemon_from_team(teamID, pokemonID, setPokemonIDS)}}> Remove </button> : <></>}
     </li>);
 }
 
@@ -67,7 +67,7 @@ function PokemonInTeamArray( { viewOnly, teamID, pokemonIDS, setPokemonIDS, poke
         addPokemon = (<li key={0}> <AddPokemonToTeam viewOnly={viewOnly} teamID={teamID} setPokemonIDS={setPokemonIDS} /> </li>);
     }
 
-    return(<div> <ul className={`flex flex-row justify-center-safe overflow-scroll m-2 gap-2`}> {documentElementList} {addPokemon} </ul> </div>);
+    return(<div className={"mx-2 my-5"}> <ul className={`flex flex-row justify-center-safe overflow-scroll m-2 gap-2`}> {documentElementList} {addPokemon} </ul> </div>);
 }
 
 export default PokemonInTeamArray;

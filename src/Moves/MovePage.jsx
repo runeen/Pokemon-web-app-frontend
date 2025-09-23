@@ -32,7 +32,7 @@ function MovePage({ pokedex, id }) {
 
     const pokemonList = <PokemonArray idArray={
         moveData.learned_by_pokemon.map(pokemon => pokemon.name)
-     } pokedex={pokedex} pokemonPerPage={3} pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser={setPokemonLikedByUser}/>
+     } pokedex={pokedex} pokemonPerPage={20} pokemonLikedByUser={pokemonLikedByUser} setPokemonLikedByUser={setPokemonLikedByUser}/>
 
 
     const effectEntry = moveData.effect_entries.find(
@@ -41,11 +41,11 @@ function MovePage({ pokedex, id }) {
 
 
     return(
-        <div className='move-page on-black'>
-            <h1 className="title">{moveData.name}</h1>
-            <p>{effectEntry.effect}</p>
-            <h2>Pokemon with this move:</h2>
-            <div className="pokemon-array">
+        <div className='flex flex-col text-center items-center gap-6 mt-4'>
+            <h1 className="text-2xl font-semibold capitalize">{moveData.name}</h1>
+            <p className="text-justify text-md mx-6">{effectEntry.effect}</p>
+            <h2 className="text-xl">Pokemon that can learn this move:</h2>
+            <div className="">
                 {pokemonList}
             </div>
         </div>

@@ -33,7 +33,7 @@ function TeamCardArray( { viewOnly, propsUsername , pokedex } ) {
     );
     
     return(
-        <div className={"max-w-screen"}>
+        <div className={"max-w-screen "}>
             <ul>
                 {teamCards}
                 {!viewOnly ? <CreateTeam teamIDArray={teamIDArray} setTeamIDArray={setTeamIDArray} /> : <></>}

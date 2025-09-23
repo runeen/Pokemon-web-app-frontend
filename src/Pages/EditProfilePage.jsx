@@ -16,7 +16,7 @@ function EditProfilePage( { pokedex } ) {
     if (pokemonLikedByUser) {
         userPokemonArray = (
             <PokemonArray pokedex = {pokedex} idArray={pokemonLikedByUser} pokemonLikedByUser={pokemonLikedByUser}
-                          setPokemonLikedByUser={setPokemonLikedByUser} pokemonPerPage={10} />
+                          setPokemonLikedByUser={setPokemonLikedByUser} pokemonPerPage={20} />
     );}
 
     let username;
@@ -27,14 +27,13 @@ function EditProfilePage( { pokedex } ) {
     
     return (
         <div>
-            <Nav resource={"pokemon"} defaultValue={1} />
-            <h1 className={'on-black'}>You are now editing your profile </h1>
-
-            <h2 className={'on-black'}>Teams: </h2>
-            <TeamCardArray viewOnly={false} pokedex={pokedex} />
-
-            <h2 className={'on-black'}>Liked Pokemon: </h2>
-            {userPokemonArray}
+            <Nav resource={"user"} defaultValue={username} />
+            <div className="flex flex-col items-center gap-4"> 
+                <h2 className={'font-semibold text-3xl my-3'}>Teams: </h2>
+                <TeamCardArray viewOnly={false} pokedex={pokedex} />
+                <h2 className={'font-semibold text-3xl my-3'}>Liked Pokemon: </h2>
+                {userPokemonArray}
+            </div>
         </div>
     );
 }

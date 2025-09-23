@@ -42,7 +42,7 @@ function UserPage( {pokedex} ) {
 
     if(userID == storageUsername) {
         editProfileRedirect = (
-            <button onClick={(e) => {window.location.replace('/edit_profile')}}>EditProfile </button>
+            <button className={"hover:text-blue-100"} onClick={(e) => {window.location.replace('/edit_profile')}}>Edit Profile </button>
         );
     }
 
@@ -51,18 +51,18 @@ function UserPage( {pokedex} ) {
         pokemonArr = (
             <PokemonArray pokedex={pokedex} idArray={likedPokemon.map(entry => entry.pokemon_id)} 
                           pokemonLikedByUser={pokemonLikedByUser} 
-                          pokemonPerPage={25} setPokemonLikedByUser={setPokemonLikedByUser} />);
+                          pokemonPerPage={20} setPokemonLikedByUser={setPokemonLikedByUser} />);
     }
     
     return(<>
         <Nav resource={'user'} defaultValue = {userID} />
-        <div className={"flex flex-col items-center"}>
-            <h1 className={""}> {userID} </h1>
-            <h2 className={""}> Teams: </h2>
-            {teamsArr} 
-            <h2 className={""}> Liked Pokemon: </h2>
-            {pokemonArr}
+        <div className={"flex flex-col items-center gap-4"}>
+            <h1 className={"font-semibold text-3xl mt-3"}> {userID} </h1>
             {editProfileRedirect}
+            <h2 className={"text-2xl font-medium"}> Teams: </h2>
+            {teamsArr} 
+            <h2 className={"text-2xl font-medium"}> Liked Pokemon: </h2>
+            {pokemonArr}
         </div>
     </>);
 

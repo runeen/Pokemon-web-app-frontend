@@ -21,22 +21,22 @@ function ViewTeam( {viewOnly, teamID, setCurrentVisibleComponent, pokemonIDS, se
         effect_func();
     }, []);
 
-    if(!teamData)   return (<h1> getting team data </h1>);
+    if(!teamData)   return (<></>);
 
     let interactionButtons = <></>;
 
     if(!viewOnly){
         interactionButtons = (<>
-            <button onClick={() => setCurrentVisibleComponent("EditTeam")}> Edit Team </button>
-            <button onClick={() => {remove_team(teamID); setCurrentVisibleComponent("RemovedTeam")}}> Remove Team </button>
+            <button className={"m-3 hover:text-blue-100"} onClick={() => setCurrentVisibleComponent("EditTeam")}> Edit Team </button>
+            <button className={"m-3 hover:text-red-100"} onClick={() => {remove_team(teamID); setCurrentVisibleComponent("RemovedTeam")}}> Remove Team </button>
         </>);
     }
     
     return(
-    <div className={"text-center "}>
-        <h1 className={"text-xl font-semibold"}> {teamData.teamReply[0].team} </h1>
-        <p className={"on-black"}> {teamData.teamReply[0].team_description} </p>
-        <PokemonInTeamArray viewOnly={viewOnly} teamID = {teamID} pokedex={pokedex} pokemonIDS={pokemonIDS}  setPokemonIDS={setPokemonIDS} />
+    <div className={"text-center border-2 border-gray-700 rounded-xl m-2 h-100"}>
+        <h1 className={"text-2xl font-semibold my-3"}> {teamData.teamReply[0].team} </h1>
+        <p className={"mx-2"}> {teamData.teamReply[0].team_description} </p>
+        <PokemonInTeamArray  viewOnly={viewOnly} teamID = {teamID} pokedex={pokedex} pokemonIDS={pokemonIDS}  setPokemonIDS={setPokemonIDS} />
         {interactionButtons}
     </div>
     );

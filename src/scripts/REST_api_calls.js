@@ -1,3 +1,5 @@
+import { API_URL } from './api_url.js'
+
 export function set_token(token, username) {
     sessionStorage.setItem("token", token);
     sessionStorage.setItem("username", JSON.stringify(username));
@@ -35,7 +37,7 @@ export async function get_user_teams() {
         window.location.replace('./login');
         return -1;
     }
-    const response = await fetch(`http://localhost:3000/api/profile/users/${username}/teams`);
+    const response = await fetch(`${API_URL}/profile/users/${username}/teams`);
 
     if (response.status == 200)   {
         const body = await response.json();
@@ -45,7 +47,7 @@ export async function get_user_teams() {
 }
 
 export async function get_users() {
-    const response = await fetch(`http://localhost:3000/api/profile/users`);
+    const response = await fetch(`${API_URL}/profile/users`);
 
     if(response.status == 200) {
         const body = await response.json();
@@ -56,7 +58,7 @@ export async function get_users() {
 
 
 export async function get_specific_user_teams(user_id) {
-    const response = await fetch(`http://localhost:3000/api/profile/users/${user_id}/teams`);
+    const response = await fetch(`${API_URL}/profile/users/${user_id}/teams`);
 
     if(response.status == 200) {
         const body = await response.json();
@@ -66,7 +68,7 @@ export async function get_specific_user_teams(user_id) {
 }
 
 export async function get_specific_user_likes(user_id) {
-    const response = await fetch(`http://localhost:3000/api/profile/users/${user_id}/liked_pokemon`); 
+    const response = await fetch(`${API_URL}/profile/users/${user_id}/liked_pokemon`); 
     if (response.status == 200) {
         const body = await response.json();
         return body;
@@ -77,7 +79,7 @@ export async function get_specific_user_likes(user_id) {
 
 export async function get_username_teams(username) {
     
-    const response = await fetch(`http://localhost:3000/api/profile/users/${username}/teams`);
+    const response = await fetch(`${API_URL}/profile/users/${username}/teams`);
     if (response.status == 200){
         const body = await response.json();
         console.log(body);
@@ -102,7 +104,7 @@ export async function edit_team(name, description, team_id) {
 
     try {
         const response = await fetch(
-            `http://localhost:3000/api/team/${team_id}`,
+            `${API_URL}/team/${team_id}`,
             {
                 method: `PUT`,
                 headers: {'Content-type': 'application/json',
@@ -138,7 +140,7 @@ export async function add_team(name, description){
 
     try {
         const response = await fetch(
-            "http://localhost:3000/api/team",
+            `${API_URL}/team`,
             {
                 method: `POST`,
                 headers: {'Content-type': 'application/json',
@@ -174,7 +176,7 @@ export async function remove_team(teamID) {
 
     try {
        const response = await fetch(
-            `http://localhost:3000/api/team/${teamID}`,
+            `${API_URL}/team/${teamID}`,
            {
                 method: `DELETE`,
                 headers: {"Content-type": "application/json",
@@ -197,7 +199,7 @@ export async function remove_team(teamID) {
 export async function get_team(teamID) {
     try {
         const response = await fetch(
-            `http://localhost:3000/api/team/${teamID}`
+            `${API_URL}/team/${teamID}`
         );
         if (response.status == 200) {
             const body = await response.json();
@@ -209,9 +211,9 @@ export async function get_team(teamID) {
     }
 }
 
-export async function get_token_from_api(url, username, password) {
+export async function get_token_from_api(endpoint, username, password) {
     try {
-        const response = await fetch(url, { 
+        const response = await fetch(`${API_URL}${endpoint}`, { 
             method: `POST`, 
             headers: { 'Content-type': 'application/json' }, 
             body: JSON.stringify({ username, password }) 
@@ -222,12 +224,15 @@ export async function get_token_from_api(url, username, password) {
 
             set_token(body.token, username);
             
-            if (response.status == 200)    set_liked_pokemon(body.likes);  // daca am primit confirmare pentru login
-            else if (response.status == 201)   set_liked_pokemon([]);      // daca am primit confirmare pentru registrare noua
+            if (response.status == 200)        await set_liked_pokemon(body.likes);  // daca am primit confirmare pentru login
+            else if (response.status == 201)   await set_liked_pokemon([]);      // daca am primit confirmare pentru registrare noua
+            return 0;
         }
+        else return -1;
     } catch (error) {
         console.log(error);
         alert(error);
+        return -1;
     }
 }
 
@@ -236,7 +241,7 @@ export async function remove_pokemon_from_team(team_id, pokemon_id, set_pokemon_
     if(!token) { window.location.replace('./login'); return -1; }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/team/${team_id}/pokemon/${pokemon_id}`,
+        const response = await fetch(`${API_URL}/team/${team_id}/pokemon/${pokemon_id}`,
         {
             method: 'DELETE',
             headers: {
@@ -265,7 +270,7 @@ export async function add_pokemon_to_team(team_id, pokemon_id, set_pokemon_array
     if(!token) { window.location.replace('./login'); return -1; }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/team/${team_id}/pokemon/${pokemon_id}`,
+        const response = await fetch(`${API_URL}/team/${team_id}/pokemon/${pokemon_id}`,
         {
             method: 'POST',
             headers: {
@@ -300,7 +305,7 @@ export async function like_pokemon(pokemon_id) {
     }
 
     if (!isNaN(pokemon_id)) {
-        const response = await fetch(`http://localhost:3000/api/pokemon/${pokemon_id}`, {
+        const response = await fetch(`${API_URL}/pokemon/${pokemon_id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -334,7 +339,7 @@ export async function remove_like_pokemon(pokemon_id) {
     }
 
     if (!isNaN(pokemon_id)) {
-        const response = await fetch(`http://localhost:3000/api/pokemon/${pokemon_id}`, {
+        const response = await fetch(`${API_URL}/pokemon/${pokemon_id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
