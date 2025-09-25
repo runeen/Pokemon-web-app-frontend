@@ -26,7 +26,7 @@ function HomePage( { pokedex } ) {
         setPokemonLikedByUser(get_liked_pokemon_from_session_storage());
     }
 
-    const editProfile = (<a className={"w-full text-center my-2 font-semibold hover:text-gray-400"} href='edit_profile'>Edit Your Profile</a>);
+    const editProfile = (<a className={"w-full text-center my-2 font-semibold hover:text-gray-400"} href='/#/edit_profile'>Edit Your Profile</a>);
     if(!randomPokemonIDS) {
         let tempPokemonIDS = [];
         while(tempPokemonIDS.length < 90) {

@@ -38,7 +38,7 @@ function Login(){
             <button className={"text-xl hover:text-blue-100 my-5"} type="submit">Log In</button>
         </form>
         <p>Don't have an account?</p>
-        <a href="/register"><h2 className={"hover:text-blue-100"} >Register one now.</h2></a>
+        <a href="/#/register"><h2 className={"hover:text-blue-100"} >Register one now.</h2></a>
         <a href="/"><h2 className='hover:text-blue-100 my-4'>Home</h2></a>
         </div>
     );

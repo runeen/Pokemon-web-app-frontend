@@ -47,7 +47,7 @@ function PokemonInTeamElement( {viewOnly, teamID ,pokemonID, setPokemonIDS, poke
 
     return(
     <li className={`border-2 ${borderColor} shadow-md ${shadowColor} flex-none rounded-md w-30 h-45 flex flex-col align-middle text-center`} >
-        <a className={"flex flex-col items-center"} href={`/pokemon/${pokemonID}`}>
+        <a className={"flex flex-col items-center"} href={`/#/pokemon/${pokemonID}`}>
             <p className="capitalize my-2">{pokemonData.name}</p> 
             <img className={`bg-gray-700 shadow-lg rounded-md size-20 my-2 mx-3`} src={pokemonData.sprites.front_default}></img>  
         </a>

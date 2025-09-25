@@ -13,7 +13,10 @@ function TeamCardArray( { viewOnly, propsUsername , pokedex } ) {
     if(!username && !propsUsername) {
         const sessionUsername = JSON.parse(sessionStorage.getItem("username"));
         if(sessionUsername) setUsername(sessionUsername);
-        else window.location.replace('./login') // TODO: pare mai logic sa fie o functie in rest care sa forteze login daca incerci sa accesezi username-ul
+        else  {
+            window.location.replace('/#/login') // TODO: pare mai logic sa fie o functie in rest care sa forteze login daca incerci sa accesezi username-ul
+            window.location.reload();
+        }
     }
 
     React.useEffect(() => {

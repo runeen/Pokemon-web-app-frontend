@@ -12,7 +12,7 @@ export function set_liked_pokemon(liked_pokemon) {
 export function get_token_from_session_storage() {
     try { return sessionStorage.token; }
     catch {
-        window.location.replace('/login');
+        window.location.replace('/#/login');
         return null
     };
 }
@@ -34,7 +34,7 @@ export async function get_user_teams() {
     const authToken = get_token_from_session_storage();
     const username = JSON.parse(sessionStorage.getItem("username"));
     if(!authToken) {
-        window.location.replace('./login');
+        window.location.replace('/#/login');
         return -1;
     }
     const response = await fetch(`${API_URL}/profile/users/${username}/teams`);
@@ -91,7 +91,7 @@ export async function get_username_teams(username) {
 export async function edit_team(name, description, team_id) {
     const authToken = get_token_from_session_storage();
     if (!authToken) {
-        window.location.replace('./login');
+        window.location.replace('/#/login');
         return -1;
     }
 
@@ -118,7 +118,7 @@ export async function edit_team(name, description, team_id) {
         }
         if (response.status == 401) {
             console.log(`NOT AUTHORIZED ERROR!`);
-            window.location.replace("./login");
+            window.location.replace("/#/login");
             return -1;
         }
         //TODO: make sure all codes are handled properly
@@ -134,7 +134,7 @@ export async function edit_team(name, description, team_id) {
 export async function add_team(name, description){
     const authToken = get_token_from_session_storage();
     if (!authToken) {
-        window.location.replace('./login');
+        window.location.replace('/#/login');
         return -1;
     }
 
@@ -155,7 +155,7 @@ export async function add_team(name, description){
         }
         if (response.status == 401) {
             console.log(`NOT AUTHORIZED ERROR!`);
-            window.location.replace("./login");
+            window.location.replace("/#/login");
             return -1;
         }
 
@@ -170,7 +170,7 @@ export async function add_team(name, description){
 export async function remove_team(teamID) {
     const authToken = get_token_from_session_storage();
     if (!authToken) {
-        window.location.replace('./login');
+        window.location.replace('/#/login');
         return -1;
     }
 
@@ -238,7 +238,7 @@ export async function get_token_from_api(endpoint, username, password) {
 
 export async function remove_pokemon_from_team(team_id, pokemon_id, set_pokemon_array) {
     const token = get_token_from_session_storage();
-    if(!token) { window.location.replace('./login'); return -1; }
+    if(!token) { window.location.replace('/#/login'); return -1; }
 
     try {
         const response = await fetch(`${API_URL}/team/${team_id}/pokemon/${pokemon_id}`,
@@ -256,7 +256,7 @@ export async function remove_pokemon_from_team(team_id, pokemon_id, set_pokemon_
         }
         else if (response.status == 401) {
             sessionStorage.clear();
-            window.location.replace('./login');
+            window.location.replace('/#/login');
             return -1;
         }
         
@@ -267,7 +267,7 @@ export async function remove_pokemon_from_team(team_id, pokemon_id, set_pokemon_
 
 export async function add_pokemon_to_team(team_id, pokemon_id, set_pokemon_array) {
     const token = get_token_from_session_storage();
-    if(!token) { window.location.replace('./login'); return -1; }
+    if(!token) { window.location.replace('/#/login'); return -1; }
 
     try {
         const response = await fetch(`${API_URL}/team/${team_id}/pokemon/${pokemon_id}`,
@@ -284,7 +284,7 @@ export async function add_pokemon_to_team(team_id, pokemon_id, set_pokemon_array
         }
         else if (response.status == 401) {
             sessionStorage.clear();
-            window.location.replace('./login');
+            window.location.replace('/#/login');
             return -1;
         }
         
@@ -299,7 +299,7 @@ export async function like_pokemon(pokemon_id) {
     const token = get_token_from_session_storage();
     
     if (!token) {
-        window.location.replace("/login");
+        window.location.replace("/#/login");
         return [];
 
     }
@@ -314,7 +314,7 @@ export async function like_pokemon(pokemon_id) {
         });
         if (response.status == 401) {
             sessionStorage.clear();
-            window.location.replace("/login");
+            window.location.replace("/#/login");
             return [];
         }
 
@@ -334,7 +334,7 @@ export async function remove_like_pokemon(pokemon_id) {
     const token = get_token_from_session_storage();
     
     if (!token) {
-        window.location.replace("/login");
+        window.location.replace("/#/login");
         return [];
     }
 
@@ -348,7 +348,7 @@ export async function remove_like_pokemon(pokemon_id) {
         });
         if (response.status == 401) {
             sessionStorage.clear();
-            window.location.replace("/login");
+            window.location.replace("/#/login");
             return [];
         }
 

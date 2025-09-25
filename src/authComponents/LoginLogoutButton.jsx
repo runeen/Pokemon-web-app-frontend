@@ -53,7 +53,7 @@ function LoginLogoutButton() {
     if (!loggedIn){
         return(
         <div className={divStyles}>
-            <button className={"m-0 sm:m-0 bg-white p-1 text-black rounded-sm text-xs"} onClick={() => {window.location.replace("/login");}}>Log in.</button>
+            <button className={"m-0 sm:m-0 bg-white p-1 text-black rounded-sm text-xs"} onClick={() => {window.location.replace("/#/login");}}>Log in.</button>
         </div>
         )
     }

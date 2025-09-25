@@ -8,7 +8,7 @@ function Nav( {resource, defaultValue} ) {
         const form = e.target;
         const formData = new FormData(form);
         console.log(formData.get("navTextArea"));
-        window.location.href = `/${resource}/${formData.get("navTextArea").replaceAll(' ', '-')}`
+        window.location.href = `/#/${resource}/${formData.get("navTextArea").replaceAll(' ', '-')}`
     }
 
     return(

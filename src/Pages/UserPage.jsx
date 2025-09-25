@@ -42,7 +42,7 @@ function UserPage( {pokedex} ) {
 
     if(userID == storageUsername) {
         editProfileRedirect = (
-            <button className={"hover:text-blue-100"} onClick={(e) => {window.location.replace('/edit_profile')}}>Edit Profile </button>
+            <button className={"hover:text-blue-100"} onClick={(e) => {window.location.replace('/#/edit_profile')}}>Edit Profile </button>
         );
     }
 

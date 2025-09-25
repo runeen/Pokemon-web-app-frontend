@@ -44,7 +44,7 @@ function Register() {
             <button className={"text-xl hover:text-blue-100 my-5"} type="submit">Register</button>
         </form>
         <p>Already have an account?</p>
-        <a href="/login"><h2 className='hover:text-blue-100'>Log in.</h2></a>
+        <a href="/#/login"><h2 className='hover:text-blue-100'>Log in.</h2></a>
         <a href="/"><h2 className='hover:text-blue-100 my-4'>Home</h2></a>
         </div>
     );
