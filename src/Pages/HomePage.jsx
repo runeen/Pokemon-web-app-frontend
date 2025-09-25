@@ -58,7 +58,7 @@ function HomePage( { pokedex } ) {
         <div>
             <Nav resource="user" defaultValue={""} />
             <div className="max-h-screen max-w-screen">
-                <h1 className={"width-full text-center text-3xl font-semibold py-5"}>POKEMON REACT</h1>
+                <h1 className={"width-full text-center text-3xl font-semibold py-5"}>Pokedex </h1>
                 <hr className={""}></hr>
                 <div className={"flex flex-wrap sm:flex-nowrap justify-items-center dividy-y sm:felx-col sm:align-around sm:divide-x"}>
                     <div className={"w-full sm:w-80/100 p-5"}>
