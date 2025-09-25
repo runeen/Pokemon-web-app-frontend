@@ -22,7 +22,7 @@ function MovePage({ pokedex, id }) {
                 }
             }
             getMoveData();
-        }, [pokedex, moveData, id]);
+        }, [id]);
 
     if (!moveData) {
         return (<div>Loading move...</div>);

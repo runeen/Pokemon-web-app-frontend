@@ -1,5 +1,4 @@
 import PokemonPage from "../Pokemon/PokemonPage";
-import PokemonArray from "../Pokemon/PokemonArray";
 import Nav from "../Pokemon/Nav";
 import AbilityPage from "../Ability/AbilityPage";
 

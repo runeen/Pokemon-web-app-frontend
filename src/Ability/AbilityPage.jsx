@@ -21,7 +21,7 @@ function AbilityPage({ pokedex, id }) {
             }
         }
         getAbilityData();
-    }, [pokedex, abilityData, id]);
+    }, [id]);
 
     if (!abilityData) {
         return (<div>Loading ability...</div>);
