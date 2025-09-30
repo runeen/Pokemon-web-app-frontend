@@ -35,11 +35,18 @@ function PokemonPage({ pokedex, id }) {
       }
       catch {
         console.log("error fetching data from pokeapi");
+        setPokemonData("NOT FOUND");
       }
     }
     getPokemonData();
   }, [id, pokedex, pokemonData, pokemonSpecies]);
+    
 
+  if (pokemonData == "NOT FOUND") {
+    window.location.replace('/#/');
+    window.location.reload();
+
+  }
   if(!id) return (<></>);
 
   if (!pokemonData || !pokemonSpecies) {

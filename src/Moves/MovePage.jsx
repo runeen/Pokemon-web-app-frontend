@@ -1,5 +1,4 @@
 import React from 'react';
-import PokemonCard from '../Pokemon/PokemonCard.jsx';
 import PokemonArray from '../Pokemon/PokemonArray.jsx';
 import {get_liked_pokemon_from_session_storage} from '../scripts/REST_api_calls.js';
 
@@ -15,14 +14,24 @@ function MovePage({ pokedex, id }) {
 
         React.useEffect(() => {
             async function getMoveData() {
-                if (moveData == null) {
-                const response = await pokedex.getMoveByName(id);
-                console.log("fetched data");
-                setMoveData(response);
+                try {
+                    if (moveData == null) {
+                    const response = await pokedex.getMoveByName(id);
+                    console.log("fetched data");
+                    setMoveData(response);
+                    }
+                } catch {
+                    console.log("error fetching move");
+                    setMoveData("NOT FOUND");
                 }
             }
             getMoveData();
         }, [id]);
+
+    if (moveData == "NOT FOUND") {
+        window.location.replace('/#/');
+        window.location.reload();
+    }
 
     if (!moveData) {
         return (<div>Loading move...</div>);

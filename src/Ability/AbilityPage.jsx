@@ -14,10 +14,16 @@ function AbilityPage({ pokedex, id }) {
 
     React.useEffect(() => {
         async function getAbilityData() {
-            if (abilityData == null) {
-                const response = await pokedex.getAbilityByName(id);
-                console.log("fetched data");
-                setAbilityData(response);
+            try {
+                if (abilityData == null) {
+                    const response = await pokedex.getAbilityByName(id);
+                    console.log(response)
+                    console.log("fetched data");
+                    setAbilityData(response);
+                }
+            } catch {
+                console.log("intru in catch");
+                setAbilityData("NOT FOUND");
             }
         }
         getAbilityData();
@@ -25,6 +31,11 @@ function AbilityPage({ pokedex, id }) {
 
     if (!abilityData) {
         return (<div>Loading ability...</div>);
+    }
+
+    if (abilityData == "NOT FOUND") {
+        window.location.replace('/#/');
+        window.location.reload();
     }
 
     const pokemonList = <PokemonArray idArray={

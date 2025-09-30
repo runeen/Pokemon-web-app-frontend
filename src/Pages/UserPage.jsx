@@ -26,7 +26,8 @@ function UserPage( {pokedex} ) {
     console.log(likedPokemon);
 
     if(likedPokemon == -1) {
-        window.history.go(-1);
+        window.location.replace('/#/');
+        window.location.reload();
     }
 
     const teamsArr = (<TeamCardArray viewOnly={true} propsUsername={userID} pokedex={pokedex} />); 
