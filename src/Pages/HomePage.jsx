@@ -60,13 +60,13 @@ function HomePage( { pokedex } ) {
             <div className="max-h-screen max-w-screen">
                 <h1 className={"width-full text-center text-3xl font-semibold py-5"}>Pokedex </h1>
                 <hr className={""}></hr>
-                <div className={"flex flex-wrap sm:flex-nowrap justify-items-center dividy-y sm:felx-col sm:align-around sm:divide-x"}>
-                    <div className={"w-full sm:w-80/100 p-5"}>
+                <div className={"flex flex-wrap lg:flex-nowrap justify-items-center dividy-y lg:felx-col lg:align-around lg:divide-x"}>
+                    <div className={"w-full lg:w-80/100 p-5"}>
                         <h2 className={"text-center font-semibold text-xl"}>Random Pokemon: </h2>
                         <PokemonArray pokedex={pokedex} idArray={randomPokemonIDS} pokemonLikedByUser={pokemonLikedByUser}
                                       setPokemonLikedByUser={setPokemonLikedByUser} pokemonPerPage={30}/>
                     </div>
-                    <div className={"w-full sm:w-20/100 p-5 flex flex-col items-center"}>
+                    <div className={"w-full lg:w-20/100 p-5 flex flex-col items-center"}>
                         <h2 className={"text-center font-semibold text-xl"}>Users: </h2>
                         {userProfilesList}
                         {loggedIn && editProfile}
