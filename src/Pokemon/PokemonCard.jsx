@@ -45,7 +45,7 @@ function PokemonCard({ id, pokedex, pokemonLikedByUser, setPokemonLikedByUser })
             </div>
             <div className={"flex flex-col"}>
                 <h2 className="text-center">Abilities:</h2>
-                {pokemonData.abilities.length > 0 ? pokemonData.abilities.map(ability => <LinkToResourcePage key={ability.ability.name} resource = {"ability"} id = {ability.ability.name} name = {ability.ability.name} className="hover:text-blue-50"/>) : <></>}
+                {pokemonData.abilities.length > 0 ? pokemonData.abilities.map(ability => <LinkToResourcePage key={`${ability.ability.name} - ${pokemonData.id}`} resource = {"ability"} id = {ability.ability.name} name = {ability.ability.name} className="hover:text-blue-50"/>) : <></>}
             </div>
         </div>
 

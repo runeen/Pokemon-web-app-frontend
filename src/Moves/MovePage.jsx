@@ -27,10 +27,12 @@ function MovePage({ pokedex, id }) {
             }
             getMoveData();
         }, [id]);
+    
 
+    //TODO: implementeaza solutie mai buna pentru ca uneori seteaza NOT FOUND cand defapt resursa exista!
     if (moveData == "NOT FOUND") {
-        window.location.replace('/#/');
-        window.location.reload();
+        //window.location.replace('/#/');
+        //window.location.reload();
     }
 
     if (!moveData) {

@@ -34,8 +34,8 @@ function AbilityPage({ pokedex, id }) {
     }
 
     if (abilityData == "NOT FOUND") {
-        window.location.replace('/#/');
-        window.location.reload();
+        //window.location.replace('/#/');
+        //window.location.reload();
     }
 
     const pokemonList = <PokemonArray idArray={

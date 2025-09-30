@@ -58,7 +58,7 @@ function PokemonPage({ pokedex, id }) {
   ).flavor_text;
 
 
-  const movesArray = pokemonData.moves.map(move => <LinkToResourcePage className={"hover:text-blue-100"} resource={"move"}  id = {move.move.name} name = {move.move.name} />);
+  const movesArray = pokemonData.moves.map(move => <LinkToResourcePage className={"hover:text-blue-100"} resource={"move"} key={move.move.name}  id = {move.move.name} name = {move.move.name} />);
 
   return (
     <div className="flex flex-col text-center items-center gap-4 mt-4">
