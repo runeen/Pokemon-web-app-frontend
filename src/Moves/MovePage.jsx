@@ -20,19 +20,17 @@ function MovePage({ pokedex, id }) {
                     console.log("fetched data");
                     setMoveData(response);
                     }
-                } catch {
+                } catch (error) {
                     console.log("error fetching move");
-                    setMoveData("NOT FOUND");
+                    if (error.status == 404)    setMoveData("NOT FOUND");
                 }
             }
             getMoveData();
         }, [id]);
-    
 
-    //TODO: implementeaza solutie mai buna pentru ca uneori seteaza NOT FOUND cand defapt resursa exista!
     if (moveData == "NOT FOUND") {
-        //window.location.replace('/#/');
-        //window.location.reload();
+        window.location.replace('/#/');
+        window.location.reload();
     }
 
     if (!moveData) {

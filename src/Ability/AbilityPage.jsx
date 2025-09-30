@@ -21,9 +21,8 @@ function AbilityPage({ pokedex, id }) {
                     console.log("fetched data");
                     setAbilityData(response);
                 }
-            } catch {
-                console.log("intru in catch");
-                setAbilityData("NOT FOUND");
+            } catch (error) {
+                if (error.status == 404)    setAbilityData("NOT FOUND");
             }
         }
         getAbilityData();
@@ -34,8 +33,8 @@ function AbilityPage({ pokedex, id }) {
     }
 
     if (abilityData == "NOT FOUND") {
-        //window.location.replace('/#/');
-        //window.location.reload();
+        window.location.replace('/#/');
+        window.location.reload();
     }
 
     const pokemonList = <PokemonArray idArray={
