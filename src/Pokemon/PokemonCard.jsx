@@ -32,8 +32,8 @@ function PokemonCard({ id, pokedex, pokemonLikedByUser, setPokemonLikedByUser })
     }
 
    return (
-        <div className={`${borderColor} ${shadowColor} shadow-sm bg-gray-600 border-2 rounded-md w-55 h-45 m-5 grid grid-cols-2 text-shadow-lg`}>
-            <div className="flex col-span-2 justify-center align-items-center  h-15">
+        <div className={`${borderColor} ${shadowColor} shadow-sm bg-gray-600 border-2 rounded-md w-55 h-45 grid grid-cols-2 text-shadow-lg`}>
+            <div className="flex col-span-2 justify-center align-items-center h-15">
                 <a className={"flex items-center"} href={`#/pokemon/${pokemonData.name}`}>
                     <h1 className="font-medium m-2 break-normal text-wrap uppercase hover:text-gray-300">{pokemonData.name.substring(0,30).replaceAll('-', ' ')}
                     </h1>
