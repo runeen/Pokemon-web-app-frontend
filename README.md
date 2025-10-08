@@ -1,6 +1,6 @@
 # Pokémon Web App Frontend
 
-SPA front-end for a Pokédex-style app featuring user authentication, team creation, and Pokémon browsing. Built with **React** and **Tailwind CSS**.
+A Pokédex-style SPA featuring user authentication, team creation, and Pokémon browsing. Built with **React** and **Tailwind CSS**.
 
 Live demo: [pokemon.alexbotez.dev](https://pokemon.alexbotez.dev)
 
